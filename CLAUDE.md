@@ -78,12 +78,17 @@ citations:           # papers only: INSPIRE citation count at ingest (snapshot)
 authors: []          # papers only
 date:                # papers only: YYYY-MM-DD publication date
 source:              # path under sources/ this page derives from
+read:                # papers only: false | YYYY-MM-DD — whether/when the USER read the paper
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
 ```
 
 Omit fields that don't apply. Always bump `updated:` when editing.
+
+`read:` is user-owned read-status tracking: ingest sets `read: false`; the user flips it to
+the date they read the paper (Obsidian Properties panel). Claude never sets it to a date.
+Filter unread papers in Obsidian search with `["read":false]`.
 
 ## Naming & linking conventions
 
@@ -93,6 +98,13 @@ Omit fields that don't apply. Always bump `updated:` when editing.
 - **Links**: Obsidian wikilinks. Paper links always carry a human display alias:
   `[[hep-th-9711200|Maldacena 1997]]`. Concept links read naturally in prose:
   `the [[holographic-principle]]`.
+- **Never wrap a line inside a wikilink**: the whole `[[target|alias]]` stays on one line —
+  a newline anywhere between `[[` and its closing `]]` breaks Obsidian rendering (the link
+  silently stops working). When wrapping prose, break *before* or *after* the link; a line
+  that runs past the usual wrap width to keep a link whole is fine. **Enforcement**: any
+  operation that writes wiki pages must run `scripts/check-wikilinks.sh` before committing —
+  it lists every split link (`file:line`) and exits non-zero; join each onto one line until
+  it reports clean. This check is mechanical, so never rely on eyeballing alone.
 - **Broken links are allowed** — a red link means "worth a page, not written yet". The lint
   workflow surfaces them as a TODO list.
 - **Citations in prose**: claims taken from a paper cite it inline via its paper-page link.
@@ -140,10 +152,28 @@ factors of $2\pi$). The wiki does **not** enforce one global convention — it e
 - **`/wiki-next`** — ranked suggestions for what to add next, aggregated from recorded
   signals (GAPs, red links, topic frontiers, unread chapters, missing derivations).
 
+- **`/wiki-verify`** — on-demand refute-pass of already-written pages against their source:
+  claims cited to a paper but not supported by its source, formulas that differ,
+  qualifiers/assumptions dropped (claim stated more generally than the source proves),
+  terminology not in the source or standard usage. Fixes confirmed findings.
+
+**Verification is on-demand, not a gate**: ingest writes pages directly from the
+`paper-analyst` extraction and commits — it does **not** verify automatically. Verification
+runs only when the user asks, via `/wiki-verify <id>` (an independent agent prompted to
+**refute**, on the written pages + the source). Fix every confirmed finding; a claim that
+can't be settled from the source is removed or explicitly flagged, never silently kept. For
+small manual edits, re-check the claim against the cited source inline. (Derivation pages have
+their own check — `/wiki-derive` step 3.)
+
 Any ingest touching the wiki **must** end by updating `Index.md` and appending one `Log.md`
-line, then `git commit`. Every operation ends committed — sessions are disposable; the vault
-(files + git history) is the only state that matters. A fresh session recovers all context
-from this file, `Index.md`, and `Log.md`.
+line, then `git commit` and `git push` (origin = the **private** repo, full sources). Every
+operation ends committed — sessions are disposable; the vault (files + git history) is the
+only state that matters. A fresh session recovers all context from this file, `Index.md`,
+and `Log.md`.
+
+The **public mirror** (github.com/cms1308/hep-th-wiki) is a separate, sources-free history —
+refresh it only deliberately via `scripts/publish-public.sh`. Never push the private history
+public: past commits contain copyrighted arXiv TeX.
 
 ## New page vs. edit heuristic
 

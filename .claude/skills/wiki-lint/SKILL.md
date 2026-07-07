@@ -11,6 +11,9 @@ description: Health-check the hep-th wiki — contradictions, orphan pages, brok
    still match page content.
 2. **Broken links** — collect all `[[targets]]` with no file. These are features (planned
    pages), but rank them by inbound-link count as a "write next" list.
+2b. **Split wikilinks** — run `scripts/check-wikilinks.sh`: any `[[...]]` broken across a
+   newline renders as plain text in Obsidian. Auto-fix by joining each onto one line (this is
+   a mechanical fix, not a content decision).
 3. **Orphans** — wiki pages with zero inbound links from other wiki pages.
 4. **Frontmatter** — missing/invalid `type`, missing `updated`, papers without `arxiv`/`source`.
 5. **Integration depth** — paper pages whose "Wiki links" section is empty or that no

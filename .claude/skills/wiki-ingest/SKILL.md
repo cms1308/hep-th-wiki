@@ -25,12 +25,16 @@ reading. For short notes/web clips, a lighter extraction is fine — don't pad.
 
 ## 3. Integrate
 
-Same as `/wiki-ingest-arxiv` steps 3–5:
+Same as `/wiki-ingest-arxiv` steps 3–5 (verification is not part of ingest — run
+`/wiki-verify` separately if wanted):
 - paper-like → `wiki/papers/<firstauthor><year>-<slug>.md`; notes/project results →
   `wiki/notes/<kebab-slug>.md`; then create/update touched topic/concept/method/result/
   question/person pages per the CLAUDE.md heuristic.
 - Update `Index.md`; append `Log.md` entry (`ingest | <slug> | <title>`, or `note | ...` for
   user results).
+- **Before committing**, run `scripts/check-wikilinks.sh` — it must report clean (exit 0); a
+  `[[...]]` split across a newline renders as plain text in Obsidian. Join any offender it
+  lists onto one line and re-run until clean.
 
 ## Long sources (textbooks, lecture notes, long reviews)
 

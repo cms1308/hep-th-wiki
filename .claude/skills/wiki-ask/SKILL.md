@@ -49,6 +49,9 @@ If the answer produced genuinely new synthesis (a connection, a worked derivatio
 clarified confusion not already on any page):
 - small addition → edit the relevant concept/result page;
 - substantial standalone synthesis → new `wiki/notes/<slug>.md` linked from related pages;
+- before filing, verify (CLAUDE.md → Verification gate): re-check each sourced claim against
+  the cited paper's TeX inline; a substantial new note gets the same independent refute-pass
+  as an ingest (`/wiki-ingest-arxiv` step 5);
 - then update `Index.md` if a page was added, and append `Log.md`:
   `## [YYYY-MM-DD] query | <short question> ` + pages touched.
 
