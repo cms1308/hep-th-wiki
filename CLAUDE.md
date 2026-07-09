@@ -73,6 +73,7 @@ tags: []             # free-form, kebab-case, e.g. [holography, string-theory]
 prerequisites: []    # page names this assumes, e.g. ["conformal-field-theory"]
 status:              # results/questions: proven | conjectured | open | resolved; derivations: verified | unverified
 arxiv:               # papers only: canonical id, e.g. hep-th/9711200
+arxiv_url:           # papers only: https://arxiv.org/abs/<arxiv id> — clickable in Obsidian Properties
 inspire:             # papers only: INSPIRE recid
 citations:           # papers only: INSPIRE citation count at ingest (snapshot)
 authors: []          # papers only

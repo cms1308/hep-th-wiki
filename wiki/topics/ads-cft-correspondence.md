@@ -5,7 +5,7 @@ aliases: [gauge/gravity duality, holographic duality, AdS/CFT]
 tags: [holography, string-theory, quantum-gravity]
 prerequisites: [quantum-field-theory, general-relativity, string-theory-basics, conformal-field-theory]
 created: 2026-07-03
-updated: 2026-07-03
+updated: 2026-07-08
 ---
 
 ## Overview
@@ -36,12 +36,36 @@ and the identification of [[gerard-t-hooft|'t Hooft's]] large-$N$ string.
   applied holography (QCD, condensed matter), and the modern
   [[black-hole-information-paradox|information-paradox]] program
   ([[quantum-extremal-surface|QES]], islands) all grow from this root.
+- **2015–25** — since any CFT is dual to *some* AdS quantum gravity, swampland statements
+  become CFT statements: the [[weak-gravity-conjecture]] is translated into the
+  [[nakayama-nomura-wgc-bound|Nakayama-Nomura bound]] $\Delta^2/q^2 \le 12c/k_F$, whose
+  SQCD counterexamples lead to the [[modified-ads-wgc-3c-2a|modified $3c-2a$ bound]]
+  ([[2308.01717|Cho-Choi-Lee-Song 2023]]), validated with zero counterexamples across
+  the complete simple-gauge-group large-$N$ classification
+  ([[2510.19136|Cho-Lee-Song 2025]]).
+- **2024–26** — the flat-space limit $\ell\to\infty$ is shown to act on the boundary as a
+  Carrollian limit $c\to0$ ([[flat-carrollian-limit-correspondence]]), so
+  [[flat-space-holography]] arises as a controlled limit of AdS/CFT — verified via
+  [[flat-space-limit-of-witten-diagrams|flat limits of Witten diagrams]] and realized
+  top-down in ABJM ([[2602.02644|Ruzziconi 2026]]).
+- **2025–26** — the soft symmetry algebras of [[celestial-holography]] are found *inside*
+  AdS$_4$/CFT$_3$: the gauge-theory [[s-algebra]] from
+  [[light-ray-operators|light transforms]] of boundary currents
+  ([[ads4-s-algebra-from-cft3-light-transforms]], [[2601.00096|Sheta et al. 2025]]) and the
+  deformed gravitational [[lambda-deformed-w-algebra|$\mathcal L_\Lambda w_{1+\infty}$]]
+  from ANEC descendants in every CFT$_3$ ([[2603.26459|Strominger–Wei 2026]]).
+- **2025–26** — heavy-operator correlators become tractable: a pair of
+  [[giant-graviton|giant gravitons]] is recast as a [[giant-graviton-defect|zero-dimensional defect]], solving all
+  strong-coupling [[giant-graviton-correlators|giant graviton correlators]] via a defect
+  bootstrap and a partially broken 10d hidden symmetry ([[2503.22987|Chen-Jiang-Zhou 2025]],
+  [[2602.13570|Chen-Jiang-Zhou 2026]]).
 
 ## Key concepts
 
 [[anti-de-sitter-space]] · [[large-n-thooft-limit]] · [[holographic-radial-coordinate]] ·
 [[holographic-principle]] · [[near-horizon-supersymmetry-enhancement]] · [[d1-d5-system]] ·
-[[btz-black-hole]]
+[[btz-black-hole]] · [[holographic-entanglement-entropy]] · [[ads3-cft2-correspondence]] ·
+[[giant-graviton]] · [[giant-graviton-correlators]]
 
 ## Key results
 
@@ -59,4 +83,5 @@ on AdS backgrounds.
 - [[ads-boundary-dictionary]] — resolved (GKP–Witten), kept for history.
 - How the bulk interior/horizon is encoded in the CFT ([[black-hole-information-paradox]]).
 - The $AdS_2$/Reissner–Nordström puzzle raised already in [[hep-th-9711200|Maldacena 1997]].
-- A duality for de Sitter or QCD-like theories.
+- A duality for de Sitter or QCD-like theories; the asymptotically flat case is now
+  approached via the Carrollian limit ([[flat-space-holography]]).

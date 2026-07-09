@@ -49,7 +49,8 @@ instead of unifying.
 
 - `wiki/papers/<safe-id>.md` from `templates/paper.md` — the full digest, LaTeX math in
   `$...$`, custom macros expanded. Fill the "Wiki links" section with every touched page.
-  Frontmatter `inspire:`/`citations:` come from `refs.json`.
+  Frontmatter `inspire:`/`citations:` come from `refs.json`; set `arxiv_url:` to
+  `https://arxiv.org/abs/<arxiv id>` (use the full id — do not let a trailing zero drop).
 - Citation graph: run `python3 scripts/citation-links.py <safe-id>` and fill the paper's
   "Citation graph" section. **Both directions**: also append this paper to the "Cited by"
   line of every wiki paper it cites, and check whether previously ingested papers cite this

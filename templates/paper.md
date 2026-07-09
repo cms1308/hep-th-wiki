@@ -4,11 +4,13 @@ title:
 aliases: []
 tags: []
 arxiv:
+arxiv_url:    # https://arxiv.org/abs/<arxiv id> — clickable link in Obsidian Properties
 inspire:      # INSPIRE recid, from sources/.../refs.json
 citations:    # INSPIRE citation_count at ingest time (snapshot, not maintained live)
 authors: []
 date:
 source:
+read:         # false until read; set to YYYY-MM-DD when the user reads it in Obsidian
 created:
 updated:
 ---

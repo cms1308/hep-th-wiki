@@ -4,7 +4,7 @@ title: Juan Maldacena
 aliases: [Juan M. Maldacena]
 tags: [string-theory, holography]
 created: 2026-07-03
-updated: 2026-07-03
+updated: 2026-07-07
 ---
 
 ## Contributions
@@ -21,6 +21,9 @@ Susskind), SYK/near-$AdS_2$ gravity (with Stanford).
 
 - [[hep-th-9711200|Maldacena 1997]] — The Large N Limit of Superconformal Field Theories and
   Supergravity.
+- [[2605.05336|Maldacena-Maloney-McPeak 2026]] — Wormholes and the imaginary distance bound
+  (Euclidean scalar wormholes fix a bound on imaginary continuation of couplings, unifying the
+  [[weak-gravity-conjecture|WGC]] and [[kontsevich-segal-witten-criterion|KSW criterion]]).
 
 ## Context
 
