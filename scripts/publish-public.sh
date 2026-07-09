@@ -20,9 +20,16 @@ else
   echo "[publish] initialized new mirror"
 fi
 
+# The public mirror is a schema/skills/scripts showcase — it keeps a single
+# curated example ingest (the Maldacena paper) under wiki/, and its own Index.md
+# and Log.md describing just that example. Never overwrite the wiki content or
+# its navigation with the private vault's full contents.
 rsync -a --delete \
   --exclude .git \
   --exclude sources/ \
+  --exclude wiki/ \
+  --exclude Index.md \
+  --exclude Log.md \
   --exclude .obsidian/ \
   --exclude .DS_Store \
   "$VAULT"/ "$TMP"/
