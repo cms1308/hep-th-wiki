@@ -17,6 +17,24 @@ updated:
 
 ## TL;DR
 
+<!-- structured block (see CLAUDE.md "Paper TL;DR block"): one-sentence plain summary, then
+     Problem / Method / Results / Takeaway bullets. Readable without following links;
+     ≤1–2 wikilinks per bullet; formulas stay in the body sections. -->
+
+One-sentence plain summary.
+
+**Problem**
+-
+
+**Method**
+-
+
+**Results**
+-
+
+**Takeaway**
+-
+
 ## Motivation
 
 ## Historical context
@@ -24,6 +42,9 @@ updated:
 ## Main results
 
 ## Methods
+
+<!-- each entry ends with which main result it feeds, e.g. "→ used in result 3"
+     (omit only for methods global to the whole paper) -->
 
 ## Conventions
 

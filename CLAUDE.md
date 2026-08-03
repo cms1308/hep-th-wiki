@@ -24,14 +24,17 @@ wiki/
   methods/           techniques and how to apply them     e.g. large-n-expansion
   results/           established results & conjectures    e.g. ryu-takayanagi-formula
   derivations/       full worked derivations              e.g. rt-formula-derivation
-  questions/         open questions                       e.g. black-hole-information-paradox
+  questions/         open questions (research; from ingest) e.g. black-hole-information-paradox
+  qa/                the user's resolved learning Q&A      e.g. ntk-vs-mup-lazy-vs-feature-learning
   people/            physicists                           e.g. juan-maldacena
   papers/            one digest page per ingested paper   e.g. hep-th-9711200
-  notes/             user's own results, Q&A outcomes, findings from other projects
+  notes/             user's own results and findings from other projects
 sources/
   arxiv/<safe-id>/   TeX source + meta.json + INSPIRE data (inspire.json, refs.json)
                      (safe-id = arxiv id with / → -)
   pdf/               papers without TeX source
+  books/             textbooks (pdf + pdftotext .txt search index + meta .md); wiki hub
+                     page per book tracks per-chapter ingest status
   web/               clipped web content (markdown, url in frontmatter)
   notes/             user-written .tex/.md raw material
 templates/           one template per page type — always start new pages from these
@@ -51,14 +54,47 @@ Every wiki page answers a different question:
 | **method** | "how do I compute/derive with this?" | What it computes · Prerequisites · How it works · Regime of validity · Canonical applications |
 | **result** | "what is known, and how solid is it?" | Statement · Derivation sketch · Assumptions · Status (proven / conjectured / disputed) · Implications |
 | **derivation** | "how do you actually get this?" | Goal · Setup and conventions · Derivation (numbered, gap-free) · Checks · References — anchored to source TeX where it exists; `status: verified / unverified` |
-| **question** | "what is unknown and why does it matter?" | Statement · Why it matters · Main attempts · Current status |
+| **question** | "what is unknown and why does it matter?" (research open problem, raised by an ingested paper) | Statement · Why it matters · Main attempts · Current status |
+| **qa** | "what did *I* ask and understand?" (a confusion the user resolved via `/wiki-ask`) | Question · Answer · Key points · See also |
 | **person** | "who is this, what did they do?" | Contributions · Key papers · Context |
-| **paper** | "what does this paper say?" | TL;DR · Motivation · Historical context · Main results · Methods · Key equations · Open questions raised · Wiki links |
+| **paper** | "what does this paper say?" | TL;DR (structured block, see below) · Motivation · Historical context · Main results · Methods · Key equations · Open questions raised · Wiki links |
 | **note** | "what did *I* find/learn?" | free-form, but must link into the wiki |
 
 Motivation, ideas, and 기초지식(prerequisites) are **facets, not page types**: motivation is a
 section on concept/paper/topic pages; prerequisites are the `prerequisites:` frontmatter list
 plus inline links.
+
+### Paper TL;DR block
+
+The `## TL;DR` of a paper page is a structured block, not a single compressed sentence — it
+is the accessible on-ramp for a reader unfamiliar with the subfield:
+
+```
+One-sentence plain summary of what the paper does.
+
+**Problem**
+- 1–2 bullets: what was unclear/unsolved and why it matters.
+
+**Method**
+- 1–3 bullets: the key idea/technique that does the work.
+
+**Results**
+- 2–3 bullets: what was established.
+
+**Takeaway**
+- 1–2 bullets: what changes now / the bigger picture.
+```
+
+Writing rules (these matter more than the structure):
+- Every bullet must be readable **without following any link** — at most 1–2 wikilinks per
+  bullet, jargon spelled out or dropped.
+- One idea per bullet, complete sentences.
+- Formulas, numbered claims, and precision live in the body sections (Main results, Key
+  equations) — the TL;DR states the same content at lower resolution. The overlap with
+  Motivation/Main results is intended (abstract vs. body).
+
+Relatedly, each **Methods** entry notes which main result it feeds, ending with
+"→ used in result 3" (omit only when the method is genuinely global to the paper).
 
 ## Frontmatter schema
 
@@ -66,12 +102,12 @@ Every wiki page starts with YAML frontmatter:
 
 ```yaml
 ---
-type: topic | concept | method | result | derivation | question | person | paper | note
+type: topic | concept | method | result | derivation | question | qa | person | paper | note
 title: Human-readable title
 aliases: []          # alternative names, common abbreviations
 tags: []             # free-form, kebab-case, e.g. [holography, string-theory]
 prerequisites: []    # page names this assumes, e.g. ["conformal-field-theory"]
-status:              # results/questions: proven | conjectured | open | resolved; derivations: verified | unverified
+status:              # results/questions: proven | established | conjectured | disputed | open | resolved; derivations: verified | unverified; qa: always resolved
 arxiv:               # papers only: canonical id, e.g. hep-th/9711200
 arxiv_url:           # papers only: https://arxiv.org/abs/<arxiv id> — clickable in Obsidian Properties
 inspire:             # papers only: INSPIRE recid
@@ -106,6 +142,15 @@ Filter unread papers in Obsidian search with `["read":false]`.
   operation that writes wiki pages must run `scripts/check-wikilinks.sh` before committing —
   it lists every split link (`file:line`) and exits non-zero; join each onto one line until
   it reports clean. This check is mechanical, so never rely on eyeballing alone.
+- **Never put `$...$` math inside a wikilink alias**: Obsidian renders the alias text as
+  raw LaTeX in both Live Preview and Reading mode (the `$\lambda$` shows literally, not as
+  $\lambda$). Keep math *outside* the `[[...]]` and link an adjacent plain word: write
+  `$\lambda$-[[holomorphic-lambda-bracket|brackets]]`,
+  not `[[holomorphic-lambda-bracket|$\lambda$-brackets]]`. When the alias would be pure math,
+  use a plain/Unicode alias (`[[critical-dimension|D=26]]`, `[[ads4-s-fold-solution|AdS₄ S-fold]]`)
+  or put the math in prose and follow it with a parenthetical link whose alias is plain
+  Unicode/English: `$\Gamma_0(2)$ ([[gamma0-2-duality-0b|Γ₀(2)]])`. **Enforcement**: also
+  checked mechanically by `scripts/check-wikilinks.sh` (flags any `$` inside a wikilink).
 - **Broken links are allowed** — a red link means "worth a page, not written yet". The lint
   workflow surfaces them as a TODO list.
 - **Citations in prose**: claims taken from a paper cite it inline via its paper-page link.
@@ -115,6 +160,8 @@ Filter unread papers in Obsidian search with `["read":false]`.
 - Obsidian MathJax: `$...$` inline, `$$...$$` display.
 - Expand paper-specific custom macros to standard LaTeX when writing wiki pages —
   pages must be self-contained.
+- Use only macros MathJax actually has: package macros like `\slashed` don't render in
+  Obsidian — write `\not D` for the Dirac slash.
 
 Sources use conflicting conventions (signatures, normalizations, supercharge choices,
 factors of $2\pi$). The wiki does **not** enforce one global convention — it enforces
@@ -182,6 +229,15 @@ public: past commits contain copyrighted arXiv TeX.
 - An attribute, example, or update to something existing → **edit in place**.
 - One paper typically touches 5–15 pages. Prefer dense linking over long pages: if a section
   outgrows ~a screen, consider splitting it into its own concept page.
+- **No page without a source.** Every knowledge page (topic / concept / method / result /
+  derivation / question / person / paper / note) must derive its substantive content from
+  ingested material under `sources/` and cite it. Never write a page from model general
+  knowledge alone — if a needed concept has no ingested source, leave it as a red link and
+  ingest a proper reference first. Background sentences woven into a sourced page are
+  tolerated only when they are unambiguous standard usage; anything nontrivial (definitions,
+  theorems, worked computations) needs a source. `qa` pages record the user's resolved
+  understanding from a conversation and cite the pages/papers the answer drew on; any part of
+  a qa answer that came from general knowledge must say so explicitly in the text.
 
 ## Log.md format
 

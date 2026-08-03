@@ -45,14 +45,24 @@ The boundary must stay visible — never blur wiki-backed claims with model memo
 
 ## 4. Compound
 
-If the answer produced genuinely new synthesis (a connection, a worked derivation, a
-clarified confusion not already on any page):
-- small addition → edit the relevant concept/result page;
-- substantial standalone synthesis → new `wiki/notes/<slug>.md` linked from related pages;
-- before filing, verify (CLAUDE.md → Verification gate): re-check each sourced claim against
-  the cited paper's TeX inline; a substantial new note gets the same independent refute-pass
-  as an ingest (`/wiki-ingest-arxiv` step 5);
-- then update `Index.md` if a page was added, and append `Log.md`:
-  `## [YYYY-MM-DD] query | <short question> ` + pages touched.
+**Default output when the user resolved a genuine confusion.** If the user asked because they
+were confused about something and the exchange clarified it (a multi-step "I don't get X → now I
+do"), file a **`qa` page**: `wiki/qa/<slug>.md` from `templates/qa.md` (`type: qa`,
+`status: resolved`). Distill the *core* of what confused them into **Question**, the resolved
+understanding into **Answer** + **Key points**, and link the concepts/papers under **See also**.
+This is distinct from `questions/` (research open problems raised by ingested papers) — do not
+put learning Q&A there.
 
-If nothing new was produced (pure lookup), skip filing — don't create noise.
+Otherwise, if the answer produced genuinely new *physics* synthesis (a connection or worked
+result not already on any page):
+- small addition → edit the relevant concept/result page;
+- substantial standalone synthesis → new `wiki/notes/<slug>.md` linked from related pages.
+
+Before filing anything, verify (CLAUDE.md → Verification gate): re-check each sourced claim
+against the cited paper's TeX inline; a substantial new note gets the same independent
+refute-pass as an ingest (`/wiki-ingest-arxiv` step 5). Then run `scripts/check-wikilinks.sh`,
+update `Index.md` if a page was added (a `qa` page goes under the `## Q&A` section), and append
+`Log.md`: `## [YYYY-MM-DD] query | <short question> ` + pages touched.
+
+If nothing new was produced and no confusion was resolved (pure lookup), skip filing — don't
+create noise.
