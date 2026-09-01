@@ -266,6 +266,32 @@ reverts atomically. Obsidian Sync stays the cross-device sync layer; it is not t
 disposable; the vault (files + git history + Obsidian Sync) is the only state that matters.
 A fresh session recovers all context from this file, `Index.md`, and `Log.md`.
 
+**Multi-machine setup**: the vault is synced by Obsidian Sync *and* tracked by git, and
+ingests run on more than one machine (plus phone/iPad, which are Sync-only). The Obsidian
+vault root is `wiki/`, one level below the repo root, so Sync never sees `.git` — keep that
+layout on every machine. Sync moves content between machines within seconds; git records
+history. Because Sync writes to the working tree behind git's back, **`git pull` is the wrong
+tool here** — it tries to merge content the tree already has and aborts. At the start of any
+session that may write to the vault, and again before committing:
+
+```
+git fetch origin && git reset --mixed origin/main
+```
+
+`--mixed` moves HEAD and the index but never touches files, so it cannot lose a Sync-delivered
+edit. Then read `git status`:
+
+- **clean** → this machine is current; proceed.
+- **modifications / new files** → real edits made elsewhere (another machine's Obsidian, or
+  mobile) that are not yet in history. Commit them, normally as their own commit before
+  starting the ingest.
+- **deletions that undo another machine's recent ingest** → Sync has *not* caught up yet.
+  Wait until Obsidian reports "Fully synced", then re-run the fetch/reset. Do not commit.
+
+Never `git reset --hard` in this vault: it discards whatever Sync delivered but git has not
+committed yet. If a push is rejected as non-fast-forward, re-run the fetch/reset and commit
+again — do not merge.
+
 The **public mirror** (github.com/cms1308/hep-th-wiki) is a separate, sources-free history:
 `scripts/publish-public.sh` rsyncs infrastructure only — it excludes `sources/`, `wiki/`,
 `Index.md` and `Log.md`, so the mirror keeps its own curated one-paper example. Run it after
