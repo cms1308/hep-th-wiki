@@ -36,9 +36,12 @@ The boundary must stay visible — never blur wiki-backed claims with model memo
 2. **Escalate to the literature.** If the question deserves a sourced answer (nontrivial
    physics, user needs to rely on it), search for the canonical reference: arXiv API
    (`https://export.arxiv.org/api/query?search_query=...`) or WebSearch. Present the 1-3 most
-   relevant papers and offer to `/wiki-ingest-arxiv` them — the fix for a missing answer is
-   ingesting the source that has it. If the user already said to go ahead (or asked
-   autonomously), ingest directly and then answer from the new pages.
+   relevant papers and **offer** to `/wiki-ingest-arxiv` them — the fix for a missing answer is
+   ingesting the source that has it. **Never ingest without the user's explicit go-ahead**:
+   a question is a request for an answer, not for an ingest. Answer from what is available,
+   label the gap (step 1), name the paper that would close it, and stop there — even when you
+   are confident the ingest is the right next step, and even when running autonomously.
+   Fetching a source to *read* while answering is fine; writing pages and committing is not.
 3. **Record the gap.** An unanswerable question is a coverage signal: append
    `## [YYYY-MM-DD] query | <question> | GAP` to `Log.md` with what was missing, and plant a
    red link on the nearest topic/concept page so it enters the "write next" queue.
@@ -60,7 +63,8 @@ result not already on any page):
 
 Before filing anything, verify (CLAUDE.md → Verification gate): re-check each sourced claim
 against the cited paper's TeX inline; a substantial new note gets the same independent
-refute-pass as an ingest (`/wiki-ingest-arxiv` step 5). Then run `scripts/check-wikilinks.sh`,
+refute-pass as an ingest (`/wiki-ingest-arxiv` step 5). Then run `scripts/check-wikilinks.sh`
+and `scripts/check-frontmatter.sh`,
 update `Index.md` if a page was added (a `qa` page goes under the `## Q&A` section), and append
 `Log.md`: `## [YYYY-MM-DD] query | <short question> ` + pages touched.
 

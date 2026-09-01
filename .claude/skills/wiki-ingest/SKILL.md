@@ -32,7 +32,8 @@ Same as `/wiki-ingest-arxiv` steps 3–5 (verification is not part of ingest —
   question/person pages per the CLAUDE.md heuristic.
 - Update `Index.md`; append `Log.md` entry (`ingest | <slug> | <title>`, or `note | ...` for
   user results).
-- **Before committing**, run `scripts/check-wikilinks.sh` — it must report clean (exit 0); a
+- **Before committing**, run `scripts/check-wikilinks.sh` and `scripts/check-frontmatter.sh` —
+  both must report clean (exit 0); a
   `[[...]]` split across a newline renders as plain text in Obsidian. Join any offender it
   lists onto one line and re-run until clean.
 

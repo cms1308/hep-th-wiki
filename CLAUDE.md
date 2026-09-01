@@ -24,6 +24,7 @@ wiki/
   methods/           techniques and how to apply them     e.g. large-n-expansion
   results/           established results & conjectures    e.g. ryu-takayanagi-formula
   derivations/       full worked derivations              e.g. rt-formula-derivation
+  lectures/          textbook-derived lecture notes, subject-scoped  e.g. string-theory-worldsheet-cft
   questions/         open questions (research; from ingest) e.g. black-hole-information-paradox
   qa/                the user's resolved learning Q&A      e.g. ntk-vs-mup-lazy-vs-feature-learning
   people/            physicists                           e.g. juan-maldacena
@@ -58,6 +59,7 @@ Every wiki page answers a different question:
 | **qa** | "what did *I* ask and understand?" (a confusion the user resolved via `/wiki-ask`) | Question · Answer · Key points · See also |
 | **person** | "who is this, what did they do?" | Contributions · Key papers · Context |
 | **paper** | "what does this paper say?" | TL;DR (structured block, see below) · Motivation · Historical context · Main results · Methods · Key equations · Open questions raised · Wiki links |
+| **lecture** | "teach me this subject, chapter by chapter" (prose lecture note merged from all ingested textbooks; see below) | Narrative prose (motivation → development → key formulas) · Conventions · Coverage (which book chapters are digested) |
 | **note** | "what did *I* find/learn?" | free-form, but must link into the wiki |
 
 Motivation, ideas, and 기초지식(prerequisites) are **facets, not page types**: motivation is a
@@ -96,13 +98,38 @@ Writing rules (these matter more than the structure):
 Relatedly, each **Methods** entry notes which main result it feeds, ending with
 "→ used in result 3" (omit only when the method is genuinely global to the paper).
 
+### Lecture notes (textbooks)
+
+Textbook chapters are ingested into **lecture notes** (`wiki/lectures/`): prose, pedagogical
+write-ups for the user's learning — in addition to, not instead of, the usual concept /
+method / result / derivation pages a chapter also feeds.
+
+- **Subject-scoped, not book-scoped.** A note is "notes on worldsheet CFT", never "notes on
+  Polchinski ch. 2". The first book ingested on a subject seeds the note structure — one
+  note per chapter-sized topic, named after the topic. Later books on the same subject
+  **merge** into the existing notes: supplements, alternative arguments, and filled gaps are
+  added in place, each passage citing its source book (hub-page link + chapter/section).
+- **The unit is a chapter-sized topic, not a chapter.** The book-chapter ↔ note mapping need
+  not stay 1:1 across books: a later book's chapter may feed several notes, or two chapters
+  one note. If a note outgrows a few screens, split it by topic and log the restructuring.
+- **Notes own the narrative; concept pages stay canonical.** A note carries motivation,
+  logical flow, and the key formulas needed to read it linearly as self-contained prose.
+  Canonical definitions, full statements, and complete derivations live on concept / method /
+  result / derivation pages, densely linked from the note — never duplicate a derivation
+  into a note, link it.
+- **Conventions**: a note declares its conventions up front (normally the first ingested
+  book's); merged material from later books is translated into them, with the dictionary
+  recorded in the note's Conventions section (the same layered-consistency policy as papers).
+- The per-book **hub page** (under `papers/`) keeps tracking chapter ingest status and page
+  mappings; its chapter table also records which lecture note(s) each chapter fed.
+
 ## Frontmatter schema
 
 Every wiki page starts with YAML frontmatter:
 
 ```yaml
 ---
-type: topic | concept | method | result | derivation | question | qa | person | paper | note
+type: topic | concept | method | result | derivation | question | qa | person | paper | lecture | note
 title: Human-readable title
 aliases: []          # alternative names, common abbreviations
 tags: []             # free-form, kebab-case, e.g. [holography, string-theory]
@@ -115,6 +142,7 @@ citations:           # papers only: INSPIRE citation count at ingest (snapshot)
 authors: []          # papers only
 date:                # papers only: YYYY-MM-DD publication date
 source:              # path under sources/ this page derives from
+coverage: []         # lectures only: book chapters digested, e.g. ["polchinski-vol1 ch.2"]
 read:                # papers only: false | YYYY-MM-DD — whether/when the USER read the paper
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
@@ -122,6 +150,15 @@ updated: YYYY-MM-DD
 ```
 
 Omit fields that don't apply. Always bump `updated:` when editing.
+
+**Frontmatter must be valid YAML** — Obsidian shows a page whose frontmatter fails to parse as
+having "invalid properties" and silently drops its aliases and tags. The two failure modes are
+both unquoted values, and both are easy to hit with physics notation: brackets or braces inside
+a flow sequence (`aliases: [foo, [A_n]_1, bar]`) and a colon inside a scalar
+(`title: Strip tension: instanton strings`). Quote the offending value —
+`aliases: [foo, "[A_n]_1", bar]`, `title: "Strip tension: instanton strings"` (commas inside
+`{}`/`()`/`[]` are fine once the item is quoted). **Enforcement**: mechanical, via
+`scripts/check-frontmatter.sh`, run alongside `scripts/check-wikilinks.sh` before committing.
 
 `read:` is user-owned read-status tracking: ingest sets `read: false`; the user flips it to
 the date they read the paper (Obsidian Properties panel). Claude never sets it to a date.
@@ -132,6 +169,10 @@ Filter unread papers in Obsidian search with `["read":false]`.
 - **File names**: kebab-case English slugs — `eternal-black-holes.md`, `juan-maldacena.md`.
 - **Paper pages**: named by sanitized arXiv id — `hep-th-9711200.md`, `1905.08255.md`.
   Non-arXiv papers: `<firstauthor><year>-<slug>.md`.
+- **Lecture notes**: subject-prefixed topic slugs — `string-theory-worldsheet-cft.md`,
+  `string-theory-t-duality.md` — never a book's chapter number. The prefix keeps basenames
+  vault-unique (Obsidian resolves wikilinks by basename, so a lecture must not collide with
+  a concept page).
 - **Links**: Obsidian wikilinks. Paper links always carry a human display alias:
   `[[hep-th-9711200|Maldacena 1997]]`. Concept links read naturally in prose:
   `the [[holographic-principle]]`.
@@ -139,7 +180,8 @@ Filter unread papers in Obsidian search with `["read":false]`.
   a newline anywhere between `[[` and its closing `]]` breaks Obsidian rendering (the link
   silently stops working). When wrapping prose, break *before* or *after* the link; a line
   that runs past the usual wrap width to keep a link whole is fine. **Enforcement**: any
-  operation that writes wiki pages must run `scripts/check-wikilinks.sh` before committing —
+  operation that writes wiki pages must run `scripts/check-wikilinks.sh` (and
+  `scripts/check-frontmatter.sh`) before committing —
   it lists every split link (`file:line`) and exits non-zero; join each onto one line until
   it reports clean. This check is mechanical, so never rely on eyeballing alone.
 - **Never put `$...$` math inside a wikilink alias**: Obsidian renders the alias text as
@@ -188,7 +230,8 @@ factors of $2\pi$). The wiki does **not** enforce one global convention — it e
   `paper-analyst` agent, write the paper page, create/update every touched topic / concept /
   method / result / question / person page, update `Index.md`, append to `Log.md`.
 - **`/wiki-ingest <path|url>`** — same integration for non-arXiv material (PDF, web, user tex,
-  project results → `notes/`).
+  project results → `notes/`). Textbook chapters additionally create or merge into the
+  subject's lecture note (see "Lecture notes (textbooks)").
 - **`/wiki-ask <question>`** — answer from the wiki first (Index → pages → sources when depth
   is needed). Cite pages and papers. If the answer produced genuinely new synthesis, file it
   back (usually a `notes/` page or an update to a concept page) — queries compound the wiki.
@@ -214,10 +257,11 @@ small manual edits, re-check the claim against the cited source inline. (Derivat
 their own check — `/wiki-derive` step 3.)
 
 Any ingest touching the wiki **must** end by updating `Index.md` and appending one `Log.md`
-line, then `git commit` and `git push` (origin = the **private** repo, full sources). Every
-operation ends committed — sessions are disposable; the vault (files + git history) is the
-only state that matters. A fresh session recovers all context from this file, `Index.md`,
-and `Log.md`.
+line, then `git commit` and `git push` (origin = the **private** repo, full sources). `wiki/`
+itself is **not tracked by git** — it is synced by Obsidian Sync, so commits carry `sources/`,
+`Index.md`, `Log.md`, and infrastructure only. Every operation ends committed — sessions are
+disposable; the vault (files + git history + Obsidian Sync) is the only state that matters.
+A fresh session recovers all context from this file, `Index.md`, and `Log.md`.
 
 The **public mirror** (github.com/cms1308/hep-th-wiki) is a separate, sources-free history —
 refresh it only deliberately via `scripts/publish-public.sh`. Never push the private history
@@ -230,7 +274,7 @@ public: past commits contain copyrighted arXiv TeX.
 - One paper typically touches 5–15 pages. Prefer dense linking over long pages: if a section
   outgrows ~a screen, consider splitting it into its own concept page.
 - **No page without a source.** Every knowledge page (topic / concept / method / result /
-  derivation / question / person / paper / note) must derive its substantive content from
+  derivation / question / person / paper / lecture / note) must derive its substantive content from
   ingested material under `sources/` and cite it. Never write a page from model general
   knowledge alone — if a needed concept has no ingested source, leave it as a red link and
   ingest a proper reference first. Background sentences woven into a sourced page are

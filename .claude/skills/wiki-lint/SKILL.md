@@ -15,7 +15,10 @@ description: Health-check the hep-th wiki — contradictions, orphan pages, brok
    newline renders as plain text in Obsidian. Auto-fix by joining each onto one line (this is
    a mechanical fix, not a content decision).
 3. **Orphans** — wiki pages with zero inbound links from other wiki pages.
-4. **Frontmatter** — missing/invalid `type`, missing `updated`, papers without `arxiv`/`source`.
+4. **Frontmatter** — run `scripts/check-frontmatter.sh` first: a page whose YAML fails to
+   parse shows in Obsidian as "invalid properties" and silently loses its aliases/tags
+   (usually an unquoted value containing brackets or a colon). Then the content checks:
+   missing/invalid `type`, missing `updated`, papers without `arxiv`/`source`.
 5. **Integration depth** — paper pages whose "Wiki links" section is empty or that no
    topic/concept page links back to (ingested but not integrated).
 6. **Contradictions / staleness** — spawn parallel Explore agents over `wiki/` clusters

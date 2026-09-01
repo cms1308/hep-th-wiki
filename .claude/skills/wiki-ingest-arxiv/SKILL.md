@@ -65,7 +65,8 @@ instead of unifying.
 - Update `Index.md`: add every new page under its type heading with a one-line summary.
 - Append one entry to `Log.md`:
   `## [YYYY-MM-DD] ingest | <arxiv-id> | <title>` + created/updated page lists.
-- **Before committing**, run `scripts/check-wikilinks.sh` — it must report clean (exit 0).
+- **Before committing**, run `scripts/check-wikilinks.sh` and `scripts/check-frontmatter.sh` —
+  both must report clean (exit 0).
   A `[[...]]` split across a newline renders as plain text in Obsidian; join any offender it
   lists onto one line and re-run until clean.
 
