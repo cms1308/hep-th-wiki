@@ -47,9 +47,9 @@ meta = {
     'categories': [c.get('term') for c in e.findall('a:category', ns)],
     'abs_url': f"https://arxiv.org/abs/{arxiv_id}",
 }
-with open(f"{dest}/meta.json", 'w') as f:
+with open(f"{dest}/meta.json", 'w', encoding='utf-8') as f:
     json.dump(meta, f, indent=2)
-with open(f"{dest}/abstract.md", 'w') as f:
+with open(f"{dest}/abstract.md", 'w', encoding='utf-8') as f:
     f.write(f"# {meta['title']}\n\n")
     f.write(f"- arXiv: {meta['abs_url']}\n")
     f.write(f"- Authors: {', '.join(meta['authors'])}\n")

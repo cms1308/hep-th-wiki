@@ -72,10 +72,11 @@ instead of unifying.
 
 ## 6. Report
 
-Tell the user: what the paper says (2-3 sentences), which pages were created/updated, and any
-tensions or broken links worth writing next.
+**Minimal, token-saving** (user request, 2026-09-01): no process narration during the ingest
+and no content summary at the end — the pages and `Log.md` carry the content. Report only:
+commit hash, page counts (created/updated), and anything that needs the user's attention
+(tensions, source inconsistencies, failures, follow-ups). A few lines at most.
 
 Verification is **not** part of ingest — it runs separately, only when the user asks, via
 `/wiki-verify <arxiv-id>` (see the `wiki-verify` skill). Ingest writes pages directly from the
-`paper-analyst` extraction and commits. In the report, remind the user they can run
-`/wiki-verify` on this ingest if they want the refute-pass against the source.
+`paper-analyst` extraction and commits.

@@ -27,7 +27,7 @@ import json, sys
 from datetime import date
 dest, arxiv_id = sys.argv[1], sys.argv[2]
 try:
-    with open(f"{dest}/inspire.json") as f:
+    with open(f"{dest}/inspire.json", encoding="utf-8") as f:
         rec = json.load(f)
     meta = rec["metadata"]
 except Exception:
@@ -56,7 +56,7 @@ out = {
     "fetched": date.today().isoformat(),
     "references": refs,
 }
-with open(f"{dest}/refs.json", "w") as f:
+with open(f"{dest}/refs.json", "w", encoding="utf-8") as f:
     json.dump(out, f, indent=1)
 n_arxiv = sum(1 for r in refs if "arxiv" in r)
 print(f"[inspire-fetch] recid={out['inspire_recid']} citations={out['citation_count']} "

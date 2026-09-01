@@ -60,5 +60,7 @@ produce a truncated digest. Ingest hierarchically instead:
 
 ## 4. Report
 
-Summarize what was learned, pages created/updated, tensions found. For long sources: report
-the coverage state (which chapters are ingested, which remain).
+**Minimal, token-saving** (user request, 2026-09-01): no process narration, no content
+summary — only commit hash, page counts, and anything needing the user's attention
+(tensions, failures, follow-ups). For long sources add one line of coverage state (which
+chapters are ingested, which remain).

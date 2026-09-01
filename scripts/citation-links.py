@@ -27,7 +27,7 @@ def load_papers():
         refs_file = d / "refs.json"
         refs = set()
         if refs_file.exists():
-            data = json.loads(refs_file.read_text())
+            data = json.loads(refs_file.read_text(encoding="utf-8"))
             refs = {norm(r["arxiv"]) for r in data.get("references", []) if r.get("arxiv")}
         papers[d.name] = refs
     return papers
