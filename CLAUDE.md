@@ -258,13 +258,19 @@ their own check — `/wiki-derive` step 3.)
 
 Any ingest touching the wiki **must** end by updating `Index.md` and appending one `Log.md`
 line, then `git commit` and `git push` (origin = the **private** repo, full sources). `wiki/`
-itself is **not tracked by git** — it is synced by Obsidian Sync, so commits carry `sources/`,
-`Index.md`, `Log.md`, and infrastructure only. Every operation ends committed — sessions are
+**is tracked by git** — a commit carries the pages it created and edited alongside `sources/`,
+`Index.md`, `Log.md`, and infrastructure, so the diff shows what the message and `Log.md`
+claim, a page's provenance survives later rewrites (`git log -p wiki/...`), and a bad ingest
+reverts atomically. Obsidian Sync stays the cross-device sync layer; it is not the history.
+`.obsidian/` and `.DS_Store` remain ignored. Every operation ends committed — sessions are
 disposable; the vault (files + git history + Obsidian Sync) is the only state that matters.
 A fresh session recovers all context from this file, `Index.md`, and `Log.md`.
 
-The **public mirror** (github.com/cms1308/hep-th-wiki) is a separate, sources-free history —
-refresh it only deliberately via `scripts/publish-public.sh`. Never push the private history
+The **public mirror** (github.com/cms1308/hep-th-wiki) is a separate, sources-free history:
+`scripts/publish-public.sh` rsyncs infrastructure only — it excludes `sources/`, `wiki/`,
+`Index.md` and `Log.md`, so the mirror keeps its own curated one-paper example. Run it after
+the private push whenever an update touched `CLAUDE.md`, `.claude/skills/`, `scripts/` or
+`templates/`; it is a clean no-op for a pure-ingest commit. Never push the private history
 public: past commits contain copyrighted arXiv TeX.
 
 ## New page vs. edit heuristic
