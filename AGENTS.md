@@ -1,6 +1,6 @@
 # hep-th LLMwiki — Schema
 
-This vault is a **hep-th knowledge wiki** maintained by Claude, following the LLMwiki pattern
+This vault is a **hep-th knowledge wiki** maintained by Codex, following the LLMwiki pattern
 (Karpathy): the human curates sources and asks questions; the LLM does all summarizing,
 cross-referencing, filing, and bookkeeping. It is the user's second brain for theoretical
 physics and a self-contained knowledge base that other physics projects can read.
@@ -15,8 +15,8 @@ physics and a self-contained knowledge base that other physics projects can read
 ## Directory layout
 
 ```
-CLAUDE.md            this schema (read by Claude Code)
-AGENTS.md            the same schema for Codex — content-identical, kept in sync (see "Agent front-ends")
+AGENTS.md            this schema (read by Codex)
+CLAUDE.md            the same schema for Claude Code — content-identical, kept in sync (see "Agent front-ends")
 Index.md             navigation: every wiki page, grouped by type, one-line summary each
 Log.md               append-only operation log
 wiki/
@@ -164,7 +164,7 @@ a flow sequence (`aliases: [foo, [A_n]_1, bar]`) and a colon inside a scalar
 `scripts/check-frontmatter.sh`, run alongside `scripts/check-wikilinks.sh` before committing.
 
 `read:` is user-owned read-status tracking: ingest sets `read: false`; the user flips it to
-the date they read the paper (Obsidian Properties panel). Claude never sets it to a date.
+the date they read the paper (Obsidian Properties panel). Codex never sets it to a date.
 Filter unread papers in Obsidian search with `["read":false]`.
 
 ## Naming & linking conventions
@@ -351,7 +351,7 @@ Prefixes: `ingest | query | derive | lint | schema | note`.
 
 ## Answering physics questions (also from other projects)
 
-When any Claude session uses this vault as a knowledge base: **read `Index.md` first**, follow
+When any Codex session uses this vault as a knowledge base: **read `Index.md` first**, follow
 links, trust wiki pages as the distilled state of knowledge, and drop to `sources/` TeX only
 when equation-level detail is required. Wiki pages cite their sources — propagate those
 citations into any downstream answer.
