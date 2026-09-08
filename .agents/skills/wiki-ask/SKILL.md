@@ -61,10 +61,11 @@ result not already on any page):
 - small addition → edit the relevant concept/result page;
 - substantial standalone synthesis → new `wiki/notes/<slug>.md` linked from related pages.
 
-Before filing anything, verify (AGENTS.md → Verification gate): re-check each sourced claim
-against the cited paper's TeX inline; a substantial new note gets the same independent
-refute-pass as an ingest (`/wiki-ingest-arxiv` step 5). Then run `scripts/check-wikilinks.sh`
-and `scripts/check-frontmatter.sh`,
+Before filing, re-check newly written sourced claims against the cited source inline and
+retain their source locators and assumptions (AGENTS.md → Evidence and document verification).
+Do not invoke an independent refute-pass automatically; that is the user's on-demand
+`/wiki-verify` workflow. If a worked derivation is needed, use `wiki-derive` and its own checks.
+Then run `scripts/check-wikilinks.sh` and `scripts/check-frontmatter.sh`,
 update `Index.md` if a page was added (a `qa` page goes under the `## Q&A` section), and append
 `Log.md`: `## [YYYY-MM-DD] query | <short question> ` + pages touched.
 

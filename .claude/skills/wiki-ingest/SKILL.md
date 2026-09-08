@@ -20,8 +20,11 @@ Input: a file path, URL, or pasted content.
 
 Read the source (PDF via the Read tool page by page). For paper-like sources, extract the same
 structure paper-analyst produces (TL;DR / motivation / results / methods / key equations /
-concepts / people / open questions); for long sources spawn a general-purpose agent to do the
+concepts / people / open questions / evidence); for long sources spawn a general-purpose agent to do the
 reading. For short notes/web clips, a lighter extraction is fine — don't pad.
+For each main claim/equation retain the source file, page/section or heading, assumptions,
+source certainty, and convention conversion. Carry these locators into the written pages;
+paper-like pages use the Evidence table, short notes may keep them inline.
 
 ## 3. Integrate
 
@@ -54,7 +57,7 @@ produce a truncated digest. Ingest hierarchically instead:
    targets of other pages' `prerequisites:`.
 4. **Default to lazy**: on first ingest, build only the hub + TOC and deep-read nothing (or
    just the chapters the user asked about). Fill remaining chapters on demand — when
-   `/wiki-ask` needs one, or when the user says "ingest chapter N" / "ingest the whole book".
+   the user authorizes a chapter suggested by `/wiki-ask`, or says "ingest chapter N" / "ingest the whole book".
    Update the hub's status column and log each chapter as
    `ingest | <slug> ch.N | <chapter title>`.
 

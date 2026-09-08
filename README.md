@@ -33,11 +33,17 @@ The same vault drives either CLI; the only difference is which files each one re
 | skills | `.claude/skills/<name>/SKILL.md` | `.agents/skills/<name>/SKILL.md` |
 | `paper-analyst` agent | `.claude/agents/paper-analyst.md` | `.codex/agents/paper-analyst.toml` |
 
-The two sides carry identical content (only the agent's name and these paths differ) and are
-kept in sync — a change to one is mirrored to the other in the same commit. Claude Code
-invokes skills as `/wiki-ask`, Codex as `$wiki-ask` (or implicitly by description). Codex runs
-`paper-analyst` as a custom sub-agent, so sub-agents must be enabled in your Codex config for
-ingests.
+The shared definitions are maintained in `harness/schema.md`, `harness/skills/`, and
+`harness/paper-analyst.md`. Internal helper `python3 scripts/sync-harness.py` generates both
+front-ends; `--check` detects drift. Edit the shared definitions, then regenerate and commit
+both together. These are maintenance helpers, not additional user-facing wiki skills.
+Claude Code invokes `/wiki-ask`, Codex `$wiki-ask` or implicit selection. Codex requires
+sub-agents enabled for paper analysis during ingest.
+
+Main results and key equations retain source locators, assumptions, certainty, and convention
+conversions in an Evidence table. On-demand `wiki-verify` saves scoped review records under
+private `verification/`; `wiki-lint` reports whether their page/source hashes still match.
+Review freshness is separate from physical proof status, and ingest still needs no refute-pass.
 
 ## Workflows (skills)
 

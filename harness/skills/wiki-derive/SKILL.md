@@ -16,7 +16,7 @@ Input: what to derive (a result, formula, or a step in a paper the user wants ex
 - If no source gives the full argument, an original derivation may start from premises
   supported by ingested sources: cite those premises and mark the new steps as your own.
   If even the premises lack ingested support, explain the gap in chat; do not file an
-  unsourced knowledge page (CLAUDE.md → No page without a source).
+  unsourced knowledge page ({{SCHEMA}} → No page without a source).
 - If a derivation page for it already exists, extend/refine that page instead.
 
 ## 2. Derive

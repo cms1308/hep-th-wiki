@@ -62,7 +62,7 @@ result not already on any page):
 - substantial standalone synthesis → new `wiki/notes/<slug>.md` linked from related pages.
 
 Before filing, re-check newly written sourced claims against the cited source inline and
-retain their source locators and assumptions (CLAUDE.md → Evidence and document verification).
+retain their source locators and assumptions ({{SCHEMA}} → Evidence and document verification).
 Do not invoke an independent refute-pass automatically; that is the user's on-demand
 `/wiki-verify` workflow. If a worked derivation is needed, use `wiki-derive` and its own checks.
 Then run `scripts/check-wikilinks.sh` and `scripts/check-frontmatter.sh`,

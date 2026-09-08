@@ -53,6 +53,16 @@ One-sentence plain summary.
 
 ## Key equations
 
+## Evidence
+
+<!-- One row per main result (R1...) and key equation (E1...), matching their body IDs.
+     Use exact source file + section/equation label; PDF: page + section. Do not guess.
+     State assumptions/range, source certainty, and convention conversion (or none).
+     This records provenance, not independent review. -->
+
+| Claim / equation | Source locator | Assumptions / range | Source certainty | Convention conversion |
+|---|---|---|---|---|
+
 ## Open questions raised
 
 ## Wiki links

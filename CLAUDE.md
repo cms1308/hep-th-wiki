@@ -1,6 +1,6 @@
 # hep-th LLMwiki — Schema
 
-This vault is a **hep-th knowledge wiki** maintained by Claude, following the LLMwiki pattern
+This vault is a **hep-th knowledge wiki** maintained by Claude Code or Codex, following the LLMwiki pattern
 (Karpathy): the human curates sources and asks questions; the LLM does all summarizing,
 cross-referencing, filing, and bookkeeping. It is the user's second brain for theoretical
 physics and a self-contained knowledge base that other physics projects can read.
@@ -10,13 +10,16 @@ physics and a self-contained knowledge base that other physics projects can read
 1. **`sources/`** — raw, immutable input data. Never edit files here (only add via ingest).
 2. **`wiki/`** — the knowledge layer. LLM-owned markdown. Freely create/update/restructure.
 3. **This file** — the schema. Conventions and workflows. Co-evolves with the wiki: when a
-   convention proves wrong, update it here and note the change in `Log.md`.
+   convention proves wrong, edit `harness/schema.md`, regenerate the front-ends, and note
+   the change in `Log.md`.
 
 ## Directory layout
 
 ```
-CLAUDE.md            this schema (read by Claude Code)
-AGENTS.md            the same schema for Codex — content-identical, kept in sync (see "Agent front-ends")
+AGENTS.md            generated schema for Codex
+CLAUDE.md            generated schema for Claude Code
+harness/             maintained schema, skills, and analyst definition
+verification/        private, append-only scoped review records (not knowledge pages)
 Index.md             navigation: every wiki page, grouped by type, one-line summary each
 Log.md               append-only operation log
 wiki/
@@ -164,7 +167,7 @@ a flow sequence (`aliases: [foo, [A_n]_1, bar]`) and a colon inside a scalar
 `scripts/check-frontmatter.sh`, run alongside `scripts/check-wikilinks.sh` before committing.
 
 `read:` is user-owned read-status tracking: ingest sets `read: false`; the user flips it to
-the date they read the paper (Obsidian Properties panel). Claude never sets it to a date.
+the date they read the paper (Obsidian Properties panel). Codex never sets it to a date.
 Filter unread papers in Obsidian search with `["read":false]`.
 
 ## Naming & linking conventions
@@ -259,6 +262,29 @@ can't be settled from the source is removed or explicitly flagged, never silentl
 small manual edits, re-check the claim against the cited source inline. (Derivation pages have
 their own check — `/wiki-derive` step 3.)
 
+### Evidence and document verification
+
+For new or substantively edited main results and key equations, preserve an evidence entry:
+claim/equation identifier → source file and section/equation label (PDF: page + section)
+→ assumptions and validity range → source certainty (proved / conjectured / numerical /
+heuristic) → convention conversion, or "none". Keep the source's qualifiers. A paper's
+`## Evidence` table owns this mapping; derived pages cite the paper and the relevant source
+locator beside the claim. This is extraction provenance, not an independent verification.
+Do not fabricate locators; mark missing support explicitly and leave unsupported knowledge
+out. Existing pages are migrated when touched, not bulk-labelled as checked.
+
+Document review state is separate from physical `status: proven / conjectured / ...` and
+from the existing derivation check status. No new page frontmatter field claims a review.
+On-demand `wiki-verify` records scope, reviewer (model only if known), findings, and SHA-256
+hashes of the final checked pages and the source files actually used in private
+`verification/*.json`. Use `scripts/verification-record.py` as described in the skill.
+Records are append-only. Hashes are captured after fixes have been rechecked; an unresolved
+finding stays explicit. `wiki-lint` compares hashes: current means the recorded file versions
+still match, stale means some changed or disappeared. Neither means the physics is proven;
+read the scope and outcome. Missing records mean no machine-readable review, not clean.
+A later review supplements history and must not erase earlier unresolved findings silently.
+Ingest does not run a refute-pass or require review records to exist.
+
 Any ingest touching the wiki **must** end by updating `Index.md` and appending one `Log.md`
 line, then `git commit` and `git push` (origin = the **private** repo, full sources). `wiki/`
 **is tracked by git** — a commit carries the pages it created and edited alongside `sources/`,
@@ -297,9 +323,9 @@ again — do not merge.
 
 The **public mirror** (github.com/cms1308/hep-th-wiki) is a separate, sources-free history:
 `scripts/publish-public.sh` rsyncs infrastructure only — it excludes `sources/`, `wiki/`,
-`Index.md` and `Log.md`, so the mirror keeps its own curated one-paper example. Run it after
+`Index.md`, `Log.md`, and private `verification/` records, so the mirror keeps its own curated one-paper example. Run it after
 the private push whenever an update touched `CLAUDE.md`, `.claude/`, their Codex mirrors
-(`AGENTS.md`, `.agents/`, `.codex/`), `scripts/` or `templates/`; it is a clean no-op for a
+(`AGENTS.md`, `.agents/`, `.codex/`), `harness/`, `scripts/` or `templates/`; it is a clean no-op for a
 pure-ingest commit. Never push the private history public: past commits contain copyrighted
 arXiv TeX.
 
@@ -313,13 +339,15 @@ The vault drives either CLI; each reads its own copy of the same instructions:
 | skills (`/wiki-*`) | `.claude/skills/<name>/SKILL.md` | `.agents/skills/<name>/SKILL.md` |
 | `paper-analyst` agent | `.claude/agents/paper-analyst.md` | `.codex/agents/paper-analyst.toml` |
 
-The two sides are **content-identical** apart from the agent's name and these file paths
-(`AGENTS.md` is `CLAUDE.md` with Claude → Codex; the Codex skills cite `AGENTS.md` where the
-Claude ones cite `CLAUDE.md`; the TOML agent carries the same instructions as the markdown
-one). Any edit to a schema, skill, or agent file is mirrored to the other side **in the same
-commit** — never let them drift. Codex invokes skills as `$wiki-ask` (its `$` syntax) or
-implicitly by description; Claude Code as `/wiki-ask`. Codex runs `paper-analyst` as a custom
-sub-agent, so sub-agents must be enabled in the local Codex config for ingests to work there.
+The maintained definitions live in `harness/schema.md`, `harness/skills/`, and
+`harness/paper-analyst.md`. Edit those files, then run the internal maintenance helper
+`python3 scripts/sync-harness.py`; never maintain the generated front-ends independently.
+The helper renders this schema, both skill directories, and the two analyst formats.
+`python3 scripts/sync-harness.py --check` detects drift and runs during `wiki-lint` and
+before infrastructure commits. It is not a new user-facing wiki command.
+Claude Code invokes `/wiki-ask`; Codex invokes `$wiki-ask` or selects it by description.
+The shared skill bodies use `/wiki-*` as workflow names; use the host's invocation syntax.
+Codex needs sub-agents enabled for the analyst during ingest.
 
 ## New page vs. edit heuristic
 
@@ -347,11 +375,11 @@ Append-only, one entry per operation, parseable by grep:
 - updated: Index
 ```
 
-Prefixes: `ingest | query | derive | lint | schema | note`.
+Prefixes: `ingest | query | derive | lint | schema | note | verify`.
 
 ## Answering physics questions (also from other projects)
 
-When any Claude session uses this vault as a knowledge base: **read `Index.md` first**, follow
+When any Codex session uses this vault as a knowledge base: **read `Index.md` first**, follow
 links, trust wiki pages as the distilled state of knowledge, and drop to `sources/` TeX only
 when equation-level detail is required. Wiki pages cite their sources — propagate those
 citations into any downstream answer.

@@ -32,7 +32,7 @@ Same as `/wiki-ingest-arxiv` steps 3–5 (verification is not part of ingest —
 `/wiki-verify` separately if wanted):
 - paper-like → `wiki/papers/<firstauthor><year>-<slug>.md`; notes/project results →
   `wiki/notes/<kebab-slug>.md`; then create/update touched topic/concept/method/result/
-  question/person pages per the AGENTS.md heuristic.
+  question/person pages per the {{SCHEMA}} heuristic.
 - Update `Index.md`; append `Log.md` entry (`ingest | <slug> | <title>`, or `note | ...` for
   user results).
 - **Before committing**, run `scripts/check-wikilinks.sh` and `scripts/check-frontmatter.sh` —

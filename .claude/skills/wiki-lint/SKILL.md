@@ -7,6 +7,13 @@ description: Health-check the hep-th wiki — contradictions, orphan pages, brok
 
 ## Checks
 
+Run the internal `python3 scripts/sync-harness.py --check` to detect generated instruction
+drift. Report it; regenerate from `harness/` only after reconciling any intentional edits.
+Run `python3 scripts/verification-record.py --status` for recorded review freshness.
+Report stale records with changed paths and their scope; current hashes do not mean a
+clean outcome or whole-page coverage. Missing records are unreviewed/legacy, not a failure.
+Do not start content verification automatically. Suggest `/wiki-verify` for stale reviews.
+
 1. **Index freshness** — every `wiki/**/*.md` appears in `Index.md` and vice versa; summaries
    still match page content.
 2. **Broken links** — collect all `[[targets]]` with no file. These are features (planned

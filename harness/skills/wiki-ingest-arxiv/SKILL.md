@@ -39,7 +39,7 @@ Read `Index.md`. For each suggested entity decide:
 Check for contradictions with existing pages; if found, state both claims with citations on
 the affected page under a `> [!warning] Tension` callout.
 
-Reconcile conventions (see AGENTS.md → Math & convention policy): if the touched topic has a
+Reconcile conventions (see {{SCHEMA}} → Math & convention policy): if the touched topic has a
 canonical convention, translate the paper's equations into it and record the conversion
 dictionary in the paper page's "Conventions" section — never convert silently. If the
 difference is physical (e.g. a different supercharge defining an index), disambiguate
@@ -62,7 +62,7 @@ instead of unifying.
   — the script reports this).
 - Create/update the topic, concept, method, result, question, person pages decided in step 3.
   Every claim sourced from this paper links back as `[[<safe-id>|Author Year]]`.
-- Follow all conventions in `AGENTS.md` (frontmatter, naming, math).
+- Follow all conventions in `{{SCHEMA}}` (frontmatter, naming, math).
 
 ## 5. Bookkeep
 

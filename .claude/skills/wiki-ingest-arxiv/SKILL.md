@@ -49,6 +49,10 @@ instead of unifying.
 
 - `wiki/papers/<safe-id>.md` from `templates/paper.md` — the full digest, LaTeX math in
   `$...$`, custom macros expanded. Fill the "Wiki links" section with every touched page.
+  Preserve the analyst's `Evidence` table for every main result and key equation, including
+  source locators, assumptions, certainty, and convention conversions. Reconcile IDs if
+  results are reordered. Keep source locators with claims propagated to other pages.
+  This provenance does not mark the ingest as independently reviewed.
   Frontmatter `inspire:`/`citations:` come from `refs.json`; set `arxiv_url:` to
   `https://arxiv.org/abs/<arxiv id>` (use the full id — do not let a trailing zero drop).
 - Citation graph: run `python3 scripts/citation-links.py <safe-id>` and fill the paper's

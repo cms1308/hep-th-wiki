@@ -13,7 +13,10 @@ Input: what to derive (a result, formula, or a step in a paper the user wants ex
 - If a source paper contains (or sketches) the derivation, **read the TeX in `sources/`** and
   follow it — the wiki's derivation must be anchored to sources where they exist, not
   reconstructed from memory. Note explicitly where you deviate, simplify, or fill gaps.
-- If no source covers it, derive from first principles and mark the page accordingly.
+- If no source gives the full argument, an original derivation may start from premises
+  supported by ingested sources: cite those premises and mark the new steps as your own.
+  If even the premises lack ingested support, explain the gap in chat; do not file an
+  unsourced knowledge page (AGENTS.md → No page without a source).
 - If a derivation page for it already exists, extend/refine that page instead.
 
 ## 2. Derive
@@ -21,6 +24,8 @@ Input: what to derive (a result, formula, or a step in a paper the user wants ex
 Write the full derivation:
 - Fix notation and conventions up front (metric signature, units, normalizations).
 - Numbered steps; justify every nontrivial step. No "it can be shown".
+- Preserve source file/section/equation locators, assumptions, and convention conversions
+  for the premises and the final result; distinguish source claims from added deductions.
 - Standard LaTeX (`$...$`, `$$...$$`), self-contained — expand source macros.
 - Keep the level matched to the wiki's prerequisites structure: link
   [[concepts]]/[[methods]] used instead of re-deriving them inline.
