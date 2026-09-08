@@ -24,9 +24,10 @@ already ingested (offer to re-integrate).
 
 ## 2. Deep-read
 
-Spawn the `paper-analyst` agent on the fetched source directory. It returns a structured
-extraction (TL;DR, motivation, historical context, results, methods, key equations, concepts,
-people, open questions, suggested wiki entities).
+Spawn the `paper-analyst` agent on the fetched source directory, using the host/model
+preference in AGENTS.md. Ask it to inventory substantive source content before writing
+the structured extraction, including a Reading guide, reusable technical details and
+Evidence. Do not impose a result/equation count that drops important content.
 
 ## 3. Reconcile against the existing wiki
 
@@ -48,7 +49,11 @@ instead of unifying.
 ## 4. Write
 
 - `wiki/papers/<safe-id>.md` from `templates/paper.md` — the full digest, LaTeX math in
-  `$...$`, custom macros expanded. Fill the "Wiki links" section with every touched page.
+  `$...$`, custom macros expanded. Follow AGENTS.md → Paper explanations and technical
+  completeness: teach the argument in readable prose, retain precise statements and
+  calculation ingredients in the appropriate sections or linked canonical pages. Keep
+  required details on the paper page when the user requests paper-only scope.
+  Fill the "Wiki links" section with every touched page.
   Preserve the analyst's `Evidence` table for every main result and key equation, including
   source locators, assumptions, certainty, and convention conversions. Reconcile IDs if
   results are reordered. Keep source locators with claims propagated to other pages.
@@ -63,6 +68,13 @@ instead of unifying.
 - Create/update the topic, concept, method, result, question, person pages decided in step 3.
   Every claim sourced from this paper links back as `[[<safe-id>|Author Year]]`.
 - Follow all conventions in `AGENTS.md` (frontmatter, naming, math).
+
+Before bookkeeping, compare the written pages against the analyst's Source inventory.
+Fill the paper's Source coverage table with source locators and actual destinations
+(page section or linked page); record reasons for intentional omissions and restore
+missing important content. Check that editing retained the equations, assumptions and
+material caveats. This checks coverage of the extraction, not its independent correctness;
+do not run a refute agent or create a verification record as part of ingest.
 
 ## 5. Bookkeep
 

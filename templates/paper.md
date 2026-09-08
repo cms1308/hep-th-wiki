@@ -39,7 +39,16 @@ One-sentence plain summary.
 
 ## Historical context
 
+## Reading guide
+
+<!-- Minimal sourced prerequisites, with short explanations of why they matter.
+     Explain the argument's path from the problem through the method to the outcome.
+     Use connected prose and explain new terms at first use; flag missing background sources. -->
+
 ## Main results
+
+<!-- Numbered results: intuition, precise claim/formula, assumptions, and source locator.
+     Do not drop independent results to meet a count. -->
 
 ## Methods
 
@@ -53,15 +62,38 @@ One-sentence plain summary.
 
 ## Key equations
 
+<!-- Equations needed to understand and reuse the results, without a fixed count.
+     For each: what it computes, inputs/notation, regime, and source locator. -->
+
+## Technical details
+
+<!-- Optional: omit this section if Key equations or linked canonical pages hold all needed
+     details. Preserve useful recurrences, initial data, normalization maps, and special cases.
+     Continue equation IDs E1, E2, ... for Evidence; avoid duplicating equations.
+     For a material source inconsistency, state the precise conflict and locator; keep
+     unresolved expressions visibly qualified, never silently repaired or presented as valid. -->
+
 ## Evidence
 
-<!-- One row per main result (R1...) and key equation (E1...), matching their body IDs.
+<!-- One row per main result (R1...) and equation (E1..., including Technical details),
+     matching their body IDs.
      Use exact source file + section/equation label; PDF: page + section. Do not guess.
      State assumptions/range, source certainty, and convention conversion (or none).
      This records provenance, not independent review. -->
 
 | Claim / equation | Source locator | Assumptions / range | Source certainty | Convention conversion |
 |---|---|---|---|---|
+
+## Source coverage
+
+<!-- Reconcile the analyst's Source inventory with the final pages. Group related items;
+     identify substantive results and calculation ingredients, not every intermediate step.
+     Destinations are this page's section/claim IDs or links to canonical pages.
+     Intentional omissions need a reason and source locator. Important content must have
+     a destination. This is editorial coverage accounting, not independent verification. -->
+
+| Source item / locator | Destination | Omission reason, if any |
+|---|---|---|
 
 ## Open questions raised
 
@@ -74,4 +106,3 @@ One-sentence plain summary.
 <!-- from scripts/citation-links.py — only papers that are in the wiki -->
 Cites: <!-- [[safe-id|Author Year]] ... or - -->
 Cited by: <!-- filled in as later papers are ingested -->
-

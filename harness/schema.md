@@ -5,6 +5,10 @@ This vault is a **hep-th knowledge wiki** maintained by Claude Code or Codex, fo
 cross-referencing, filing, and bookkeeping. It is the user's second brain for theoretical
 physics and a self-contained knowledge base that other physics projects can read.
 
+The wiki serves two equally important uses: helping the user understand papers in
+unfamiliar fields, and supplying precise, sourced material to research projects.
+Readable explanations and reusable calculations must survive the same ingest.
+
 ## Three layers
 
 1. **`sources/`** — raw, immutable input data. Never edit files here (only add via ingest).
@@ -64,7 +68,7 @@ Every wiki page answers a different question:
 | **question** | "what is unknown and why does it matter?" (research open problem, raised by an ingested paper) | Statement · Why it matters · Main attempts · Current status |
 | **qa** | "what did *I* ask and understand?" (a confusion the user resolved via `/wiki-ask`) | Question · Answer · Key points · See also |
 | **person** | "who is this, what did they do?" | Contributions · Key papers · Context |
-| **paper** | "what does this paper say?" | TL;DR (structured block, see below) · Motivation · Historical context · Main results · Methods · Key equations · Open questions raised · Wiki links |
+| **paper** | "what does this paper say, and how can I understand and use it?" | TL;DR · Motivation · Historical context · Reading guide · Main results · Methods · Conventions · Key equations · Technical details (when needed) · Evidence · Source coverage · Open questions raised · Wiki links |
 | **lecture** | "teach me this subject, chapter by chapter" (prose lecture note merged from all ingested textbooks; see below) | Narrative prose (motivation → development → key formulas) · Conventions · Coverage (which book chapters are digested) |
 | **note** | "what did *I* find/learn?" | free-form, but must link into the wiki |
 
@@ -103,6 +107,42 @@ Writing rules (these matter more than the structure):
 
 Relatedly, each **Methods** entry notes which main result it feeds, ending with
 "→ used in result 3" (omit only when the method is genuinely global to the paper).
+
+### Paper explanations and technical completeness
+
+Ingest has two roles: extract the source's substantive content, then explain and file it.
+The same model can perform both; a second provider is not required. In Codex, prefer
+GPT6 (`gpt-6-astra`) for the paper analyst when available, unless the user chooses otherwise.
+
+- **Extract before compressing.** Inventory independent main results and the ingredients
+  needed to understand or reuse them: definitions, normalization maps, initial data,
+  recurrences, relevant special cases, and validity limits, including useful appendix material.
+  Do not cap the number of results or equations. Select for significance and reuse;
+  transcribing every intermediate algebraic step is unnecessary.
+- **Teach the argument.** A paper's Reading guide gives the minimal sourced prerequisites
+  and connects the problem, choice of method, central argument, and outcome in prose.
+  Explain unfamiliar terms at first use; a link alone is not an explanation. Main results
+  give the intuition before the precise claim and its assumptions. The existing source policy
+  applies to prerequisite explanations too; mark gaps instead of inventing background.
+- **Keep calculations findable.** Retain equations needed to follow the argument beside it.
+  Longer computational ingredients go in Key equations, an optional Technical details
+  section, or linked canonical method/result/derivation pages. State what each computes,
+  its inputs, notation, and regime. Preserve exact statements and locators through editing;
+  respect paper-only requests by keeping the needed details on that page.
+- **Make source problems concrete.** When a material inconsistency is noticed during
+  reading, show its source locator and the conflicting definition, equation, or simple
+  counterexample. Do not silently repair it or discard useful information merely because
+  it is awkward to explain. Preserve unresolved source statements only as explicit caveats,
+  not usable identities. Keep caveats near the affected claim and avoid repeated generic
+  warnings or downgrading an established result without a specific reason.
+- **Account for omissions.** Before finishing, compare the draft with the source inventory.
+  A compact Source coverage table maps substantive source items to page sections or linked
+  destinations; intentional omissions carry a reason and source locator. Restore missing
+  important content. Evidence maps written claims to support; Source coverage reveals what
+  was left out. This is editorial bookkeeping, not an independent physics verification.
+
+Apply this structure to new or substantively revised paper digests. Existing pages do not
+need a bulk rewrite; short notes and clips can keep the same information inline.
 
 ### Lecture notes (textbooks)
 

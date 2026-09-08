@@ -40,6 +40,12 @@ both together. These are maintenance helpers, not additional user-facing wiki sk
 Claude Code invokes `/wiki-ask`, Codex `$wiki-ask` or implicit selection. Codex requires
 sub-agents enabled for paper analysis during ingest.
 
+Paper digests support both learning unfamiliar fields and reusing results in research.
+The analyst inventories substantive results and calculation ingredients before summarizing;
+the editor combines a readable argument with precise formulas and optional technical details.
+A Source coverage table maps that inventory to the final pages so omissions can be caught.
+These roles can use the same model; Codex prefers GPT6 for the analyst unless overridden.
+
 Main results and key equations retain source locators, assumptions, certainty, and convention
 conversions in an Evidence table. On-demand `wiki-verify` saves scoped review records under
 private `verification/`; `wiki-lint` reports whether their page/source hashes still match.

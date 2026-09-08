@@ -20,8 +20,12 @@ Input: a file path, URL, or pasted content.
 
 Read the source (PDF via the Read tool page by page). For paper-like sources, extract the same
 structure paper-analyst produces (TL;DR / motivation / results / methods / key equations /
-concepts / people / open questions / evidence); for long sources spawn a general-purpose agent to do the
+reading guide / technical details / concepts / people / open questions / evidence /
+source inventory); for long sources spawn a general-purpose agent to do the
 reading. For short notes/web clips, a lighter extraction is fine — don't pad.
+Inventory substantive results and reusable calculation ingredients within the requested
+scope before compressing them. Preserve important material without a fixed result/equation
+count, and follow AGENTS.md → Paper explanations and technical completeness.
 For each main claim/equation retain the source file, page/section or heading, assumptions,
 source certainty, and convention conversion. Carry these locators into the written pages;
 paper-like pages use the Evidence table, short notes may keep them inline.
@@ -33,6 +37,11 @@ Same as `/wiki-ingest-arxiv` steps 3–5 (verification is not part of ingest —
 - paper-like → `wiki/papers/<firstauthor><year>-<slug>.md`; notes/project results →
   `wiki/notes/<kebab-slug>.md`; then create/update touched topic/concept/method/result/
   question/person pages per the AGENTS.md heuristic.
+- Paper digests teach the argument and preserve calculations in technical sections or linked
+  canonical pages. Before finishing, map the source inventory to the written destinations
+  in Source coverage; restore important omissions or record a reason and source locator.
+  For short notes this accounting can stay inline; for textbook chapters use the chapter
+  table and linked note/page sections. This is coverage bookkeeping, not a refute-pass.
 - Update `Index.md`; append `Log.md` entry (`ingest | <slug> | <title>`, or `note | ...` for
   user results).
 - **Before committing**, run `scripts/check-wikilinks.sh` and `scripts/check-frontmatter.sh` —
