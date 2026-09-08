@@ -15,6 +15,9 @@ created:
 updated:
 ---
 
+<!-- Source annotations belong only in Evidence; do not repeat them after body paragraphs
+     or formulas. Match body R/E IDs or section/claim names to the table. -->
+
 ## TL;DR
 
 <!-- structured block (see CLAUDE.md "Paper TL;DR block"): one-sentence plain summary, then
@@ -47,7 +50,7 @@ One-sentence plain summary.
 
 ## Main results
 
-<!-- Numbered results: intuition, precise claim/formula, assumptions, and source locator.
+<!-- Numbered results: intuition, precise claim/formula, and assumptions.
      Do not drop independent results to meet a count. -->
 
 ## Methods
@@ -63,22 +66,23 @@ One-sentence plain summary.
 ## Key equations
 
 <!-- Equations needed to understand and reuse the results, without a fixed count.
-     For each: what it computes, inputs/notation, regime, and source locator. -->
+     For each: what it computes, inputs/notation, and regime. -->
 
 ## Technical details
 
 <!-- Optional: omit this section if Key equations or linked canonical pages hold all needed
      details. Preserve useful recurrences, initial data, normalization maps, and special cases.
      Continue equation IDs E1, E2, ... for Evidence; avoid duplicating equations.
-     For a material source inconsistency, state the precise conflict and locator; keep
+     For a material source inconsistency, state the precise conflict, with locators in Evidence; keep
      unresolved expressions visibly qualified, never silently repaired or presented as valid. -->
 
 ## Evidence
 
 <!-- One row per main result (R1...) and equation (E1..., including Technical details),
-     matching their body IDs.
+     matching their body IDs; map other sourced passages by section/claim name.
      Use exact source file + section/equation label; PDF: page + section. Do not guess.
      State assumptions/range, source certainty, and convention conversion (or none).
+     Refer to body sections for assumptions/conversions already explained there.
      This records provenance, not independent review. -->
 
 | Claim / equation | Source locator | Assumptions / range | Source certainty | Convention conversion |
@@ -89,10 +93,11 @@ One-sentence plain summary.
 <!-- Reconcile the analyst's Source inventory with the final pages. Group related items;
      identify substantive results and calculation ingredients, not every intermediate step.
      Destinations are this page's section/claim IDs or links to canonical pages.
-     Intentional omissions need a reason and source locator. Important content must have
+     Refer to Evidence IDs instead of repeating locators. Intentional omissions without
+     an Evidence entry need a reason and source locator. Important content must have
      a destination. This is editorial coverage accounting, not independent verification. -->
 
-| Source item / locator | Destination | Omission reason, if any |
+| Source item / Evidence ID | Destination | Omission reason, if any |
 |---|---|---|
 
 ## Open questions raised

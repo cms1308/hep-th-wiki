@@ -56,7 +56,9 @@ instead of unifying.
   Fill the "Wiki links" section with every touched page.
   Preserve the analyst's `Evidence` table for every main result and key equation, including
   source locators, assumptions, certainty, and convention conversions. Reconcile IDs if
-  results are reordered. Keep source locators with claims propagated to other pages.
+  results are reordered. Put source citations/locators only in Evidence, not also after body
+  paragraphs or formulas; map other sourced passages by section/claim name. For claims
+  propagated to other pages, follow AGENTS.md → Evidence and document verification.
   This provenance does not mark the ingest as independently reviewed.
   Frontmatter `inspire:`/`citations:` come from `refs.json`; set `arxiv_url:` to
   `https://arxiv.org/abs/<arxiv id>` (use the full id — do not let a trailing zero drop).
@@ -70,9 +72,10 @@ instead of unifying.
 - Follow all conventions in `AGENTS.md` (frontmatter, naming, math).
 
 Before bookkeeping, compare the written pages against the analyst's Source inventory.
-Fill the paper's Source coverage table with source locators and actual destinations
+Fill the paper's Source coverage table with Evidence IDs and actual destinations
 (page section or linked page); record reasons for intentional omissions and restore
-missing important content. Check that editing retained the equations, assumptions and
+missing important content. Include a source locator only for items without an Evidence entry.
+Check that editing retained the equations, assumptions and
 material caveats. This checks coverage of the extraction, not its independent correctness;
 do not run a refute agent or create a verification record as part of ingest.
 

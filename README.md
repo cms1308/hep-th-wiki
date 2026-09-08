@@ -47,7 +47,10 @@ A Source coverage table maps that inventory to the final pages so omissions can 
 These roles can use the same model; Codex prefers GPT6 for the analyst unless overridden.
 
 Main results and key equations retain source locators, assumptions, certainty, and convention
-conversions in an Evidence table. On-demand `wiki-verify` saves scoped review records under
+conversions in an Evidence table. Paper digests keep source annotations there only, without
+repeating them after paragraphs/formulas; Source coverage references Evidence IDs. Other
+page types default to inline citations without a second table.
+On-demand `wiki-verify` saves scoped review records under
 private `verification/`; `wiki-lint` reports whether their page/source hashes still match.
 Review freshness is separate from physical proof status, and ingest still needs no refute-pass.
 

@@ -28,7 +28,8 @@ scope before compressing them. Preserve important material without a fixed resul
 count, and follow {{SCHEMA}} → Paper explanations and technical completeness.
 For each main claim/equation retain the source file, page/section or heading, assumptions,
 source certainty, and convention conversion. Carry these locators into the written pages;
-paper-like pages use the Evidence table, short notes may keep them inline.
+paper-like pages use only the Evidence table for source annotations, short notes keep them
+inline. Do not repeat the same support in both places.
 
 ## 3. Integrate
 
@@ -39,7 +40,8 @@ Same as `/wiki-ingest-arxiv` steps 3–5 (verification is not part of ingest —
   question/person pages per the {{SCHEMA}} heuristic.
 - Paper digests teach the argument and preserve calculations in technical sections or linked
   canonical pages. Before finishing, map the source inventory to the written destinations
-  in Source coverage; restore important omissions or record a reason and source locator.
+  in Source coverage, referring to Evidence IDs instead of repeating source locators;
+  restore important omissions or record a reason and locator for items without an Evidence entry.
   For short notes this accounting can stay inline; for textbook chapters use the chapter
   table and linked note/page sections. This is coverage bookkeeping, not a refute-pass.
 - Update `Index.md`; append `Log.md` entry (`ingest | <slug> | <title>`, or `note | ...` for

@@ -22,11 +22,14 @@ paper's custom macros (check the preamble for `\newcommand`/`\def`) so every equ
 self-contained.
 
 Return these sections; omit Technical details if its material fits in Key equations.
+Keep source citations/locators only in Evidence, not after body paragraphs or formulas.
+Body items use R/E IDs or section/claim names to match the table.
 
 ## Source inventory
-A compact table: `Item | Source file + section/label | Substantive content | Extraction location`.
+A compact table: `Item | Evidence ID | Substantive content | Extraction location`.
 Group related calculation ingredients. Account for each important item in the sections below;
-give a reason for intentional omissions. This inventory lets the editor detect missing content,
+give a reason and source locator for intentional omissions without an Evidence entry.
+This inventory lets the editor detect missing content,
 while Evidence checks support for content actually included. It is not a verification verdict.
 
 ## TL;DR
@@ -38,18 +41,18 @@ per bullet; spell out jargon. Keep formulas and numbered claims in the body.
 The problem/tension in physics that prompted this paper.
 
 ## Historical context
-What prior work it builds on, with names, years, and supporting source locations.
+What prior work it builds on, with names and years; put supporting source locations in Evidence.
 Distinguish the paper's attributions from independently established historical claims.
 
 ## Reading guide
 Explain the minimal prerequisites and why they matter, then the path from the problem through
 the choice of method to the main conclusion. Use connected prose for a reader new to the
-subfield; explain terms at first use instead of relying on links. Cite source locations.
+subfield; explain terms at first use instead of relying on links. Map support in Evidence.
 Flag prerequisite gaps that require another source rather than filling them from memory.
 
 ## Main results
 Numbered, each with an intuitive explanation followed by a precise claim or conjecture,
-its key formula(s), assumptions, and source locator. Preserve independent results rather
+its key formula(s) and assumptions; put the source locator in Evidence. Preserve independent results rather
 than merging them away to meet a count or length target.
 
 ## Methods
@@ -62,8 +65,8 @@ coupling/field normalizations, factors of $2\pi$/$N$ in key definitions, and —
 relevant — which supercharge(s) define protected quantities (indices, BPS bounds). Quote the
 defining equation when the choice is nonstandard. If the paper never states a convention,
 say "not stated" rather than guessing.
-If a material source inconsistency is noticed, give its locator and a concrete conflicting
-definition/equation or simple counterexample. Keep unresolved formulas explicitly flagged;
+If a material source inconsistency is noticed, give a concrete conflicting definition/equation
+or simple counterexample, with locators in Evidence. Keep unresolved formulas explicitly flagged;
 do not silently fix them or replace useful detail with a vague warning.
 
 ## Key equations
@@ -74,7 +77,7 @@ Use stable IDs E1, E2, ...; place longer families under Technical details when u
 ## Technical details
 Reusable recurrences, boundary/initial data, normalization dictionaries, and relevant special
 solutions that would interrupt the main explanation. Continue the E-numbering for equations.
-Give source locators and assumptions; avoid duplicating formulas already presented above.
+State assumptions and map source locators in Evidence; avoid duplicating formulas already presented above.
 
 ## Evidence
 Map every numbered main result and key equation to its support. Use stable IDs R1, R2,
@@ -86,6 +89,8 @@ Do not guess locators; label absent support. Distinguish your deductions from so
 and identify their sourced premises. This is an extraction, not a verification verdict.
 Include the equations in Technical details. Keep uncertainty specific to affected claims;
 do not repeat generic caveats throughout the extraction.
+Map other sourced passages (background, conventions, caveats) by section/claim name.
+Refer to body sections for assumptions/conversions already explained there rather than copying prose.
 
 ## Concepts
 Each distinct physics concept the paper INTRODUCES or centrally USES: name — one-line

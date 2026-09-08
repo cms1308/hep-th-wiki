@@ -130,14 +130,15 @@ GPT6 (`gpt-6-astra`) for the paper analyst when available, unless the user choos
   its inputs, notation, and regime. Preserve exact statements and locators through editing;
   respect paper-only requests by keeping the needed details on that page.
 - **Make source problems concrete.** When a material inconsistency is noticed during
-  reading, show its source locator and the conflicting definition, equation, or simple
-  counterexample. Do not silently repair it or discard useful information merely because
+  reading, show the conflicting definition, equation, or simple counterexample and put its
+  source locator in Evidence. Do not silently repair it or discard useful information merely because
   it is awkward to explain. Preserve unresolved source statements only as explicit caveats,
   not usable identities. Keep caveats near the affected claim and avoid repeated generic
   warnings or downgrading an established result without a specific reason.
 - **Account for omissions.** Before finishing, compare the draft with the source inventory.
   A compact Source coverage table maps substantive source items to page sections or linked
-  destinations; intentional omissions carry a reason and source locator. Restore missing
+  destinations. Refer to Evidence IDs instead of repeating their source locators;
+  intentional omissions without an Evidence entry carry a reason and source locator. Restore missing
   important content. Evidence maps written claims to support; Source coverage reveals what
   was left out. This is editorial bookkeeping, not an independent physics verification.
 
@@ -241,7 +242,8 @@ Filter unread papers in Obsidian search with `["read":false]`.
   checked mechanically by `scripts/check-wikilinks.sh` (flags any `$` inside a wikilink).
 - **Broken links are allowed** — a red link means "worth a page, not written yet". The lint
   workflow surfaces them as a TODO list.
-- **Citations in prose**: claims taken from a paper cite it inline via its paper-page link.
+- **Citations**: claims taken from a paper cite its paper-page link. Put the citation beside
+  the claim or in the page's Evidence table, following the single-location rule below.
 
 ## Math & convention policy
 
@@ -308,8 +310,15 @@ For new or substantively edited main results and key equations, preserve an evid
 claim/equation identifier → source file and section/equation label (PDF: page + section)
 → assumptions and validity range → source certainty (proved / conjectured / numerical /
 heuristic) → convention conversion, or "none". Keep the source's qualifiers. A paper's
-`## Evidence` table owns this mapping; derived pages cite the paper and the relevant source
-locator beside the claim. This is extraction provenance, not an independent verification.
+`## Evidence` table owns this mapping. **Use one citation location per page: inline or
+table, never both for the same support.** Paper digests default to Evidence only: body
+results/equations carry R/E IDs, without repeated source annotations after paragraphs or
+formulas. Map other sourced passages by section/claim name in the same table. Source
+inventory/coverage refers to those entries instead of restating locators. Other page types
+default to citations and locators beside claims, without an additional Evidence table.
+In tables, refer to body sections for assumptions/conversions already explained there.
+Keep conditions and material caveats readable in the body. This is extraction provenance,
+not an independent verification.
 Do not fabricate locators; mark missing support explicitly and leave unsupported knowledge
 out. Existing pages are migrated when touched, not bulk-labelled as checked.
 
