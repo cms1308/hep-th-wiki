@@ -166,10 +166,15 @@ method / result / derivation pages a chapter also feeds.
 - **Concise section titles.** Use short subject labels for `##` and `###` headings, such as
   "Action principles", "Light-cone quantization", and "Closed-string spectrum". Put
   explanations and guiding questions in the prose, rather than sentence-style headings.
-- **Name references explicitly.** In lecture prose, do not call a book or paper "the source"
-  or use "the source's": source already has a physical meaning. Name the author, book,
-  chapter, or section when attribution matters; otherwise state the physics directly and
-  retain its citation. This does not change physical uses of source or the `source:` field.
+- **State the physics directly.** Lecture prose explains physical objects, statements,
+  and arguments, rather than reporting what a reference says. Write the actual statement
+  with its assumptions, regime, and uncertainty, then attach the citation. Avoid frames
+  such as "Polchinski argues", "the introduction discusses", or "the chapter states";
+  replacing "the source" with an author's name is not sufficient. Keep attribution when
+  it is itself relevant, such as historical credit or an explicit convention dictionary.
+  Do not turn conjectures, heuristic arguments, or unproved assumptions into established
+  facts by removing reporting language. Do not call a reference "the source" in prose:
+  source has a physical meaning. Physical uses and the `source:` field are unchanged.
 - **No Coverage section by default.** Keep the compact `coverage:` chapter list and the
   book hub's chapter table. Do not repeat an item-by-item coverage map in the lecture.
 - **Conventions**: a note declares its conventions up front (normally the first ingested
