@@ -166,6 +166,11 @@ method / result / derivation pages a chapter also feeds.
 - **Concise section titles.** Use short subject labels for `##` and `###` headings, such as
   "Action principles", "Light-cone quantization", and "Closed-string spectrum". Put
   explanations and guiding questions in the prose, rather than sentence-style headings.
+- **Use established physics terminology.** Name objects and procedures with their standard
+  technical terms, then explain those terms in plain prose. Do not invent informal substitute
+  names for accessibility: write "Nambu–Goto action", not "area action", and name the
+  actual field, component, constraint, or symmetry instead of a vague metaphor. Ordinary
+  descriptions of what an object does are welcome; they must not replace its technical name.
 - **State the physics directly.** Lecture prose explains physical objects, statements,
   and arguments, rather than reporting what a reference says. Write the actual statement
   with its assumptions, regime, and uncertainty, then attach the citation. Avoid frames
