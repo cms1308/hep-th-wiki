@@ -13,7 +13,9 @@ updated:
      this topic — never book-scoped. Motivation → development → key formulas, readable
      linearly and self-contained. Canonical definitions and full derivations live on
      concept/method/result/derivation pages — link them, don't duplicate. Cite the source
-     book (hub-page link + chapter/section) per passage. -->
+     book (hub-page link + chapter/section) per passage. Use concise subject headings,
+     e.g. Action principles / Light-cone quantization, not explanatory sentences.
+     Track chapters in coverage frontmatter and the book hub; no Coverage section. -->
 
 ## Conventions
 

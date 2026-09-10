@@ -68,8 +68,8 @@ Every wiki page answers a different question:
 | **question** | "what is unknown and why does it matter?" (research open problem, raised by an ingested paper) | Statement · Why it matters · Main attempts · Current status |
 | **qa** | "what did *I* ask and understand?" (a confusion the user resolved via `/wiki-ask`) | Question · Answer · Key points · See also |
 | **person** | "who is this, what did they do?" | Contributions · Key papers · Context |
-| **paper** | "what does this paper say, and how can I understand and use it?" | TL;DR · Motivation · Historical context · Reading guide · Main results · Methods · Conventions · Key equations · Technical details (when needed) · Evidence · Source coverage · Open questions raised · Wiki links |
-| **lecture** | "teach me this subject, chapter by chapter" (prose lecture note merged from all ingested textbooks; see below) | Narrative prose (motivation → development → key formulas) · Conventions · Coverage (which book chapters are digested) |
+| **paper** | "what does this paper say, and how can I understand and use it?" | TL;DR · Motivation · Historical context · Reading guide · Main results · Methods · Conventions · Key equations · Technical details (when needed) · Evidence · Open questions raised · Wiki links |
+| **lecture** | "teach me this subject, chapter by chapter" (prose lecture note merged from all ingested textbooks; see below) | Narrative prose under concise subject headings · Conventions; chapter tracking in frontmatter and book hub |
 | **note** | "what did *I* find/learn?" | free-form, but must link into the wiki |
 
 Motivation, ideas, and 기초지식(prerequisites) are **facets, not page types**: motivation is a
@@ -135,12 +135,11 @@ GPT6 (`gpt-6-astra`) for the paper analyst when available, unless the user choos
   it is awkward to explain. Preserve unresolved source statements only as explicit caveats,
   not usable identities. Keep caveats near the affected claim and avoid repeated generic
   warnings or downgrading an established result without a specific reason.
-- **Account for omissions.** Before finishing, compare the draft with the source inventory.
-  A compact Source coverage table maps substantive source items to page sections or linked
-  destinations. Refer to Evidence IDs instead of repeating their source locators;
-  intentional omissions without an Evidence entry carry a reason and source locator. Restore missing
-  important content. Evidence maps written claims to support; Source coverage reveals what
-  was left out. This is editorial bookkeeping, not an independent physics verification.
+- **Check for omissions internally.** Before finishing, compare the draft and linked
+  calculations with the substantive source content; restore important omissions. Do not
+  generate separate Source inventory or Coverage tables in extractions or wiki pages unless
+  requested. Keep material scope limits beside affected claims and retain Evidence/source
+  citations. This editorial check is not independent physics verification.
 
 Apply this structure to new or substantively revised paper digests. Existing pages do not
 need a bulk rewrite; short notes and clips can keep the same information inline.
@@ -164,6 +163,11 @@ method / result / derivation pages a chapter also feeds.
   Canonical definitions, full statements, and complete derivations live on concept / method /
   result / derivation pages, densely linked from the note — never duplicate a derivation
   into a note, link it.
+- **Concise section titles.** Use short subject labels for `##` and `###` headings, such as
+  "Action principles", "Light-cone quantization", and "Closed-string spectrum". Put
+  explanations and guiding questions in the prose, rather than sentence-style headings.
+- **No Coverage section by default.** Keep the compact `coverage:` chapter list and the
+  book hub's chapter table. Do not repeat an item-by-item coverage map in the lecture.
 - **Conventions**: a note declares its conventions up front (normally the first ingested
   book's); merged material from later books is translated into them, with the dictionary
   recorded in the note's Conventions section (the same layered-consistency policy as papers).
@@ -313,8 +317,7 @@ heuristic) → convention conversion, or "none". Keep the source's qualifiers. A
 `## Evidence` table owns this mapping. **Use one citation location per page: inline or
 table, never both for the same support.** Paper digests default to Evidence only: body
 results/equations carry R/E IDs, without repeated source annotations after paragraphs or
-formulas. Map other sourced passages by section/claim name in the same table. Source
-inventory/coverage refers to those entries instead of restating locators. Other page types
+formulas. Map other sourced passages by section/claim name in the same table. Other page types
 default to citations and locators beside claims, without an additional Evidence table.
 In tables, refer to body sections for assumptions/conversions already explained there.
 Keep conditions and material caveats readable in the body. This is extraction provenance,

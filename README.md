@@ -43,12 +43,14 @@ sub-agents enabled for paper analysis during ingest.
 Paper digests support both learning unfamiliar fields and reusing results in research.
 The analyst inventories substantive results and calculation ingredients before summarizing;
 the editor combines a readable argument with precise formulas and optional technical details.
-A Source coverage table maps that inventory to the final pages so omissions can be caught.
+Inventory and omission checks stay internal; separate inventory/coverage tables are omitted
+unless requested. Lectures use concise subject headings, with chapter tracking only in
+frontmatter and the book hub.
 These roles can use the same model; Codex prefers GPT6 for the analyst unless overridden.
 
 Main results and key equations retain source locators, assumptions, certainty, and convention
 conversions in an Evidence table. Paper digests keep source annotations there only, without
-repeating them after paragraphs/formulas; Source coverage references Evidence IDs. Other
+repeating them after paragraphs/formulas. Other
 page types default to inline citations without a second table.
 On-demand `wiki-verify` saves scoped review records under
 private `verification/`; `wiki-lint` reports whether their page/source hashes still match.

@@ -88,18 +88,6 @@ One-sentence plain summary.
 | Claim / equation | Source locator | Assumptions / range | Source certainty | Convention conversion |
 |---|---|---|---|---|
 
-## Source coverage
-
-<!-- Reconcile the analyst's Source inventory with the final pages. Group related items;
-     identify substantive results and calculation ingredients, not every intermediate step.
-     Destinations are this page's section/claim IDs or links to canonical pages.
-     Refer to Evidence IDs instead of repeating locators. Intentional omissions without
-     an Evidence entry need a reason and source locator. Important content must have
-     a destination. This is editorial coverage accounting, not independent verification. -->
-
-| Source item / Evidence ID | Destination | Omission reason, if any |
-|---|---|---|
-
 ## Open questions raised
 
 ## Wiki links

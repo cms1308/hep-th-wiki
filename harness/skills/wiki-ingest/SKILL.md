@@ -20,12 +20,13 @@ Input: a file path, URL, or pasted content.
 
 Read the source (PDF via the Read tool page by page). For paper-like sources, extract the same
 structure paper-analyst produces (TL;DR / motivation / results / methods / key equations /
-reading guide / technical details / concepts / people / open questions / evidence /
-source inventory); for long sources spawn a general-purpose agent to do the
+reading guide / technical details / concepts / people / open questions / evidence);
+for long sources spawn a general-purpose agent to do the
 reading. For short notes/web clips, a lighter extraction is fine — don't pad.
 Inventory substantive results and reusable calculation ingredients within the requested
 scope before compressing them. Preserve important material without a fixed result/equation
 count, and follow {{SCHEMA}} → Paper explanations and technical completeness.
+Keep the inventory internal; do not emit a separate inventory/coverage table unless requested.
 For each main claim/equation retain the source file, page/section or heading, assumptions,
 source certainty, and convention conversion. Carry these locators into the written pages;
 paper-like pages use only the Evidence table for source annotations, short notes keep them
@@ -39,11 +40,10 @@ Same as `/wiki-ingest-arxiv` steps 3–5 (verification is not part of ingest —
   `wiki/notes/<kebab-slug>.md`; then create/update touched topic/concept/method/result/
   question/person pages per the {{SCHEMA}} heuristic.
 - Paper digests teach the argument and preserve calculations in technical sections or linked
-  canonical pages. Before finishing, map the source inventory to the written destinations
-  in Source coverage, referring to Evidence IDs instead of repeating source locators;
-  restore important omissions or record a reason and locator for items without an Evidence entry.
-  For short notes this accounting can stay inline; for textbook chapters use the chapter
-  table and linked note/page sections. This is coverage bookkeeping, not a refute-pass.
+  canonical pages. Before finishing, check internally for important omissions and restore
+  missing content. Retain source citations and material scope limits, without a Coverage
+  section. For textbooks, track chapters only in the hub table and compact `coverage:` list;
+  use concise subject headings in lecture notes. This is editing, not a refute-pass.
 - Update `Index.md`; append `Log.md` entry (`ingest | <slug> | <title>`, or `note | ...` for
   user results).
 - **Before committing**, run `scripts/check-wikilinks.sh` and `scripts/check-frontmatter.sh` —

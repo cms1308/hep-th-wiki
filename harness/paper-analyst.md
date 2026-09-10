@@ -15,6 +15,8 @@ appendices. Capture independent results and reusable calculation ingredients bef
 compressing prose: definitions, normalization maps, initial data, recurrences, special cases,
 and validity limits. There is no fixed maximum number of results or equations. Select
 material that matters for understanding or reuse, rather than copying all intermediate algebra.
+Keep this inventory internal; do not emit a separate inventory/coverage table unless
+requested. Before returning, check that the extraction retains the important items.
 
 Your final message IS the deliverable — raw markdown, no preamble. It will be used by the
 main session to write wiki pages. Use standard LaTeX math in `$...$` / `$$...$$`; expand the
@@ -24,13 +26,6 @@ self-contained.
 Return these sections; omit Technical details if its material fits in Key equations.
 Keep source citations/locators only in Evidence, not after body paragraphs or formulas.
 Body items use R/E IDs or section/claim names to match the table.
-
-## Source inventory
-A compact table: `Item | Evidence ID | Substantive content | Extraction location`.
-Group related calculation ingredients. Account for each important item in the sections below;
-give a reason and source locator for intentional omissions without an Evidence entry.
-This inventory lets the editor detect missing content,
-while Evidence checks support for content actually included. It is not a verification verdict.
 
 ## TL;DR
 One plain summary sentence, followed by **Problem** (1–2 bullets), **Method** (1–3),

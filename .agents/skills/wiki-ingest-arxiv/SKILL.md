@@ -27,7 +27,8 @@ already ingested (offer to re-integrate).
 Spawn the `paper-analyst` agent on the fetched source directory, using the host/model
 preference in AGENTS.md. Ask it to inventory substantive source content before writing
 the structured extraction, including a Reading guide, reusable technical details and
-Evidence. Do not impose a result/equation count that drops important content.
+Evidence. Keep the inventory internal rather than requesting a separate table.
+Do not impose a result/equation count that drops important content.
 
 ## 3. Reconcile against the existing wiki
 
@@ -71,12 +72,10 @@ instead of unifying.
   Every claim sourced from this paper links back as `[[<safe-id>|Author Year]]`.
 - Follow all conventions in `AGENTS.md` (frontmatter, naming, math).
 
-Before bookkeeping, compare the written pages against the analyst's Source inventory.
-Fill the paper's Source coverage table with Evidence IDs and actual destinations
-(page section or linked page); record reasons for intentional omissions and restore
-missing important content. Include a source locator only for items without an Evidence entry.
-Check that editing retained the equations, assumptions and
-material caveats. This checks coverage of the extraction, not its independent correctness;
+Before bookkeeping, check the written pages and linked calculations against the extraction
+for important omissions. Restore missing content and retain equations, assumptions, source
+citations, and material caveats. Do not add a separate Coverage table unless requested.
+This is an internal completeness check, not independent physics verification;
 do not run a refute agent or create a verification record as part of ingest.
 
 ## 5. Bookkeep
