@@ -46,6 +46,8 @@ the editor combines a readable argument with precise formulas and optional techn
 Inventory and omission checks stay internal; separate inventory/coverage tables are omitted
 unless requested. Lectures use concise subject headings, with chapter tracking only in
 frontmatter and the book hub.
+Book hubs are compact chapter navigation tables; detailed content and concept links live
+on the chapter pages, and operation history stays in `Log.md`.
 These roles can use the same model; Codex prefers GPT6 for the analyst unless overridden.
 
 Main results and key equations retain source locators, assumptions, certainty, and convention

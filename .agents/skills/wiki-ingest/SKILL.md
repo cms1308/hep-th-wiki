@@ -60,8 +60,10 @@ produce a truncated digest. Ingest hierarchically instead:
 1. **Extract structure first** (cheap, mechanical): TOC from `\chapter`/`\section` commands,
    or the PDF's outline/first pages.
 2. **Create a hub page** in `wiki/papers/<slug>.md`: normal frontmatter plus a chapter table —
-   each row `chapter | one-line scope | status (unread / ingested YYYY-MM-DD) | links`.
-   The hub holds no digest of its own; it tracks coverage.
+   each row `chapter | title | status (unread / partial / ingested) | lecture note(s)`.
+   If no lecture exists, link the primary chapter destination. Add only a short source or
+   pagination note if useful. Do not repeat chapter summaries, concept lists, equations,
+   "Wiki links" sections, or operation history; those belong on chapter pages or in `Log.md`.
 3. **Ingest per chapter**: each chapter is one paper-analyst unit (pass it the file/line range
    for that chapter only; run chapters in parallel when doing several). Textbook chapters
    mostly feed **concept** and **method** pages — they are the wiki's 기초지식 layer, the

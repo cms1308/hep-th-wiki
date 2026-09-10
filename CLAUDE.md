@@ -171,8 +171,11 @@ method / result / derivation pages a chapter also feeds.
 - **Conventions**: a note declares its conventions up front (normally the first ingested
   book's); merged material from later books is translated into them, with the dictionary
   recorded in the note's Conventions section (the same layered-consistency policy as papers).
-- The per-book **hub page** (under `papers/`) keeps tracking chapter ingest status and page
-  mappings; its chapter table also records which lecture note(s) each chapter fed.
+- **Minimal book hubs.** A book hub under `papers/` is a navigation page: bibliographic
+  frontmatter, an optional short source/pagination note, and a table of chapter number,
+  title, current ingest status, and lecture-note link(s). If no lecture exists, link the
+  primary chapter destination. Keep concept lists, equations, chapter summaries, and
+  repeated "Wiki links" sections on the chapter pages; keep operation history in `Log.md`.
 
 ## Frontmatter schema
 
