@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# check-frontmatter.sh — flag wiki pages whose YAML frontmatter does not parse.
+# check-frontmatter.sh — flag invalid wiki frontmatter and paper arXiv IDs that are not quoted.
 #
 # Obsidian shows these as "invalid properties" and silently drops aliases/tags.
 # The two failure modes seen in practice, both from unquoted values:
@@ -15,7 +15,7 @@
 # Usage: scripts/check-frontmatter.sh [dir]   (default dir: wiki)
 root="${1:-wiki}"
 python3 - "$root" <<'PY'
-import sys, pathlib
+import sys, pathlib, re
 try:
     import yaml
 except ImportError:
@@ -34,12 +34,18 @@ for f in sorted(root.rglob('*.md')):
         d = yaml.safe_load(t[4:end])
         if not isinstance(d, dict):
             bad.append((str(f), 'frontmatter is not a key/value mapping'))
+            continue
+        if d.get('type') == 'paper' and 'arxiv' in d:
+            raw = t[4:end]
+            match = re.search(r'^arxiv:\s*(.*?)\s*$', raw, re.MULTILINE)
+            if match and not re.fullmatch(r'(["\']).*\1', match.group(1)):
+                bad.append((str(f), 'paper arxiv must be a quoted YAML string'))
     except Exception as e:
         bad.append((str(f), str(e).splitlines()[0][:80]))
 for f, e in bad:
     print(f"  {f}: {e}")
 if bad:
-    print(f"FAIL: {len(bad)} page(s) with unparseable frontmatter — quote the offending value")
+    print(f"FAIL: {len(bad)} page(s) with invalid frontmatter")
     sys.exit(1)
 print("OK: all frontmatter parses")
 PY

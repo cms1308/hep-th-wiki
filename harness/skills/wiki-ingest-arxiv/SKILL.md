@@ -55,13 +55,15 @@ instead of unifying.
   calculation ingredients in the appropriate sections or linked canonical pages. Keep
   required details on the paper page when the user requests paper-only scope.
   Fill the "Wiki links" section with every touched page.
-  Preserve the analyst's `Evidence` table for every main result and key equation, including
-  source locators, assumptions, certainty, and convention conversions. Reconcile IDs if
-  results are reordered. Put source citations/locators only in Evidence, not also after body
+  Preserve the analyst's compact `Evidence` table for every main result and key equation,
+  including source locators and support/certainty. Keep assumptions and ranges in the body,
+  and convention translations in Conventions. Preserve the `^rN`/`^eN` Obsidian block IDs
+  and reconcile IDs if results are reordered. Put source citations/locators only in Evidence, not also after body
   paragraphs or formulas; map other sourced passages by section/claim name. For claims
   propagated to other pages, follow {{SCHEMA}} → Evidence and document verification.
   This provenance does not mark the ingest as independently reviewed.
-  Frontmatter `inspire:`/`citations:` come from `refs.json`; set `arxiv_url:` to
+  Frontmatter `inspire:`/`citations:` come from `refs.json`; always quote `arxiv:` as a YAML
+  string, and set `arxiv_url:` to
   `https://arxiv.org/abs/<arxiv id>` (use the full id — do not let a trailing zero drop).
 - Citation graph: run `python3 scripts/citation-links.py <safe-id>` and fill the paper's
   "Citation graph" section. **Both directions**: also append this paper to the "Cited by"

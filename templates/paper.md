@@ -3,7 +3,7 @@ type: paper
 title:
 aliases: []
 tags: []
-arxiv:
+arxiv:           # always quote as a string, e.g. "2303.01111"
 arxiv_url:    # https://arxiv.org/abs/<arxiv id> — clickable link in Obsidian Properties
 inspire:      # INSPIRE recid, from sources/.../refs.json
 citations:    # INSPIRE citation_count at ingest time (snapshot, not maintained live)
@@ -44,14 +44,16 @@ One-sentence plain summary.
 
 ## Reading guide
 
-<!-- Minimal sourced prerequisites, with short explanations of why they matter.
-     Explain the argument's path from the problem through the method to the outcome.
-     Use connected prose and explain new terms at first use; flag missing background sources. -->
+<!-- Normally 3–6 connected paragraphs: only the minimal sourced background and the
+     argument's path from problem through method to outcome. Do not repeat Motivation,
+     Historical context, Methods, or Main results item by item. Introduce no new result or
+     equation here; explain terms at first use and flag missing background sources. -->
 
 ## Main results
 
-<!-- Numbered results: intuition, precise claim/formula, and assumptions.
-     Do not drop independent results to meet a count. -->
+<!-- Number results, starting with `1. **R1 — Title.**`, then give intuition, the precise
+     claim/formula, assumptions, and range. End the complete item with `^r1` on its own line.
+     Do not drop independent results. -->
 
 ## Methods
 
@@ -66,7 +68,8 @@ One-sentence plain summary.
 ## Key equations
 
 <!-- Equations needed to understand and reuse the results, without a fixed count.
-     For each: what it computes, inputs/notation, and regime. -->
+     Start with `**E1 — Title.**`; explain what it computes, inputs/notation, and regime;
+     end the complete item with `^e1` on its own line. -->
 
 ## Technical details
 
@@ -79,14 +82,15 @@ One-sentence plain summary.
 ## Evidence
 
 <!-- One row per main result (R1...) and equation (E1..., including Technical details),
-     matching their body IDs; map other sourced passages by section/claim name.
+     linking its body block; map other sourced passages by section/claim name.
      Use exact source file + section/equation label; PDF: page + section. Do not guess.
-     State assumptions/range, source certainty, and convention conversion (or none).
-     Refer to body sections for assumptions/conversions already explained there.
+     State support/certainty compactly. Assumptions/ranges stay in the body and convention
+     translations stay in Conventions.
      This records provenance, not independent review. -->
 
-| Claim / equation | Source locator | Assumptions / range | Source certainty | Convention conversion |
-|---|---|---|---|---|
+| ID | Source locator | Support / certainty |
+|---|---|---|
+| [[#^r1|R1]] | | |
 
 ## Open questions raised
 

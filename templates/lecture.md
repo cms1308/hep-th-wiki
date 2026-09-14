@@ -3,7 +3,6 @@ type: lecture
 title:
 aliases: []
 tags: []
-prerequisites: []
 coverage: [] # book chapters digested, e.g. ["polchinski-vol1 ch.2"]
 created:
 updated:

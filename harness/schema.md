@@ -73,8 +73,8 @@ Every wiki page answers a different question:
 | **note** | "what did *I* find/learn?" | free-form, but must link into the wiki |
 
 Motivation, ideas, and 기초지식(prerequisites) are **facets, not page types**: motivation is a
-section on concept/paper/topic pages; prerequisites are the `prerequisites:` frontmatter list
-plus inline links.
+section on concept/paper/topic pages, while prerequisite background is explained where it is
+needed and linked inline. It is not duplicated as frontmatter metadata.
 
 ### Paper TL;DR block
 
@@ -119,22 +119,25 @@ GPT6 (`gpt-6-astra`) for the paper analyst when available, unless the user choos
   recurrences, relevant special cases, and validity limits, including useful appendix material.
   Do not cap the number of results or equations. Select for significance and reuse;
   transcribing every intermediate algebraic step is unnecessary.
-- **Teach the argument.** A paper's Reading guide gives the minimal sourced prerequisites
-  and connects the problem, choice of method, central argument, and outcome in prose.
-  Explain unfamiliar terms at first use; a link alone is not an explanation. Main results
-  give the intuition before the precise claim and its assumptions. The existing source policy
-  applies to prerequisite explanations too; mark gaps instead of inventing background.
+- **Teach the argument.** A paper's Reading guide is a short, non-duplicative route through
+  the paper: normally 3–6 connected paragraphs explaining only the minimal sourced background
+  and the path from problem to method to outcome. It introduces no new result or equation that
+  belongs in Main results or Key equations, and does not repeat Motivation, Historical context,
+  or Methods item by item. Explain unfamiliar terms at first use; a link alone is not an
+  explanation. Main results give the intuition before the precise claim and its assumptions.
+  Mark source gaps instead of inventing background.
 - **Keep calculations findable.** Retain equations needed to follow the argument beside it.
   Longer computational ingredients go in Key equations, an optional Technical details
   section, or linked canonical method/result/derivation pages. State what each computes,
   its inputs, notation, and regime. Preserve exact statements and locators through editing;
   respect paper-only requests by keeping the needed details on that page.
-- **Make source problems concrete.** When a material inconsistency is noticed during
-  reading, show the conflicting definition, equation, or simple counterexample and put its
-  source locator in Evidence. Do not silently repair it or discard useful information merely because
-  it is awkward to explain. Preserve unresolved source statements only as explicit caveats,
-  not usable identities. Keep caveats near the affected claim and avoid repeated generic
-  warnings or downgrading an established result without a specific reason.
+- **Make incidental source problems concrete.** Ingest records local inconsistencies that
+  become apparent during extraction—for example conflicting definitions, dimensional or
+  grading mismatches, or a simple substitution into a displayed formula. Show the concrete
+  conflict and put its source locator in Evidence. Label it as an incidental extraction
+  finding, not an exhaustive review. Systematic counterexample searches, global correctness
+  judgments, and attempts to refute the paper belong to `wiki-verify`. Do not silently repair
+  a source problem or preserve an unresolved expression as a usable identity.
 - **Check for omissions internally.** Before finishing, compare the draft and linked
   calculations with the substantive source content; restore important omissions. Do not
   generate separate Source inventory or Coverage tables in extractions or wiki pages unless
@@ -201,9 +204,8 @@ type: topic | concept | method | result | derivation | question | qa | person | 
 title: Human-readable title
 aliases: []          # alternative names, common abbreviations
 tags: []             # free-form, kebab-case, e.g. [holography, string-theory]
-prerequisites: []    # page names this assumes, e.g. ["conformal-field-theory"]
 status:              # results/questions: proven | established | conjectured | disputed | open | resolved; derivations: verified | unverified; qa: always resolved
-arxiv:               # papers only: canonical id, e.g. hep-th/9711200
+arxiv:               # papers only: quoted canonical string, e.g. "hep-th/9711200" or "2303.01111"
 arxiv_url:           # papers only: https://arxiv.org/abs/<arxiv id> — clickable in Obsidian Properties
 inspire:             # papers only: INSPIRE recid
 citations:           # papers only: INSPIRE citation count at ingest (snapshot)
@@ -308,7 +310,7 @@ factors of $2\pi$). The wiki does **not** enforce one global convention — it e
   it exists), verify it (dimensions, limits, independent check), record it as a
   `derivations/` page linked from the relevant result/concept pages.
 - **`/wiki-lint`** — health check: contradictions, orphan pages, broken links worth writing,
-  missing prerequisites, stale `Index.md` entries, papers ingested but poorly integrated.
+  stale `Index.md` entries, papers ingested but poorly integrated.
 - **`/wiki-next`** — ranked suggestions for what to add next, aggregated from recorded
   signals (GAPs, red links, topic frontiers, unread chapters, missing derivations).
 
@@ -327,18 +329,21 @@ their own check — `/wiki-derive` step 3.)
 
 ### Evidence and document verification
 
-For new or substantively edited main results and key equations, preserve an evidence entry:
-claim/equation identifier → source file and section/equation label (PDF: page + section)
-→ assumptions and validity range → source certainty (proved / conjectured / numerical /
-heuristic) → convention conversion, or "none". Keep the source's qualifiers. A paper's
-`## Evidence` table owns this mapping. **Use one citation location per page: inline or
+For new or substantively edited main results and key equations, preserve a compact evidence
+entry: claim/equation identifier → source file and section/equation label (PDF: page +
+section) → source support/certainty (proved / conjectured / numerical / heuristic). Keep
+assumptions and validity ranges readable in the corresponding body item, and keep convention
+conversions in Conventions rather than repeating either in the table. A paper's `## Evidence`
+table owns the locator mapping. **Use one citation location per page: inline or
 table, never both for the same support.** Paper digests default to Evidence only: body
-results/equations carry R/E IDs, without repeated source annotations after paragraphs or
-formulas. Map other sourced passages by section/claim name in the same table. Other page types
-default to citations and locators beside claims, without an additional Evidence table.
-In tables, refer to body sections for assumptions/conversions already explained there.
-Keep conditions and material caveats readable in the body. This is extraction provenance,
-not an independent verification.
+results/equations carry R/E IDs and Obsidian block IDs (`^r1`, `^e1`, ...), without repeated
+source annotations after paragraphs or formulas. Place the matching block ID after the
+complete numbered result or equation item and link the Evidence ID back to that block; do not
+add an outline heading merely to make an anchor. Map other sourced passages by section/claim
+name in the same table. Other
+page types default to citations and locators beside claims, without an additional Evidence
+table. Keep conditions and material caveats readable in the body. This is extraction
+provenance, not an independent verification.
 Do not fabricate locators; mark missing support explicitly and leave unsupported knowledge
 out. Existing pages are migrated when touched, not bulk-labelled as checked.
 

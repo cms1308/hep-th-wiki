@@ -40,15 +40,19 @@ What prior work it builds on, with names and years; put supporting source locati
 Distinguish the paper's attributions from independently established historical claims.
 
 ## Reading guide
-Explain the minimal prerequisites and why they matter, then the path from the problem through
-the choice of method to the main conclusion. Use connected prose for a reader new to the
-subfield; explain terms at first use instead of relying on links. Map support in Evidence.
-Flag prerequisite gaps that require another source rather than filling them from memory.
+In normally 3–6 connected paragraphs, explain only the minimal background and the path from
+the problem through the choice of method to the main conclusion. Do not repeat Motivation,
+Historical context, Methods, or Main results item by item, and introduce no new result or
+equation that belongs in those sections. Explain terms at first use instead of relying on
+links. Map support in Evidence. Flag background gaps that require another source rather than
+filling them from memory.
 
 ## Main results
-Numbered, each with an intuitive explanation followed by a precise claim or conjecture,
-its key formula(s) and assumptions; put the source locator in Evidence. Preserve independent results rather
-than merging them away to meet a count or length target.
+Number the results, beginning each item with `1. **R1 — Title.**`, followed by an intuitive
+explanation, precise claim or conjecture, key formula(s), assumptions, and validity range.
+End the complete item with its Obsidian block ID on a separate line (`^r1`, `^r2`, ...); put
+the source locator only in Evidence. Preserve independent results rather than merging them
+away to meet a count or length target.
 
 ## Methods
 Each technique used, with 1-3 sentences on how it's applied here. End each entry with
@@ -67,7 +71,8 @@ do not silently fix them or replace useful detail with a vague warning.
 ## Key equations
 The equations needed to understand and reuse the results, without a fixed count.
 For each, explain what it computes, define its inputs and notation, and state the regime.
-Use stable IDs E1, E2, ...; place longer families under Technical details when useful.
+Begin each item with `**E1 — Title.**` and end the complete item with a separate Obsidian
+block ID (`^e1`, `^e2`, ...). Place longer families under Technical details when useful.
 
 ## Technical details
 Reusable recurrences, boundary/initial data, normalization dictionaries, and relevant special
@@ -77,15 +82,21 @@ State assumptions and map source locators in Evidence; avoid duplicating formula
 ## Evidence
 Map every numbered main result and key equation to its support. Use stable IDs R1, R2,
 ... and E1, E2, ... matching the entries above:
-`ID | source file + section/equation label (PDF: page + section) | assumptions/range | source certainty | convention conversion`
-State whether the source proves, conjectures, numerically supports, or heuristically argues
-it. Retain qualifiers and say "not stated" when necessary. Use "none" for no conversion.
+`ID | source file + section/equation label (PDF: page + section) | support / certainty`
+Link each ID to its body block (`[[#^r1|R1]]`, `[[#^e1|E1]]`). State whether the source
+proves, conjectures, numerically supports, or heuristically argues it. Retain qualifiers and
+say "not stated" when necessary. Assumptions and ranges stay in the body item; convention
+translations stay in Conventions.
 Do not guess locators; label absent support. Distinguish your deductions from source claims
 and identify their sourced premises. This is an extraction, not a verification verdict.
 Include the equations in Technical details. Keep uncertainty specific to affected claims;
 do not repeat generic caveats throughout the extraction.
 Map other sourced passages (background, conventions, caveats) by section/claim name.
-Refer to body sections for assumptions/conversions already explained there rather than copying prose.
+
+If a local inconsistency becomes apparent during extraction, state the exact conflicting
+definition, grading/dimensional mismatch, or simple substitution and map it here. Label it an
+incidental extraction finding, not a comprehensive check. Do not systematically search for
+counterexamples or make global correctness judgments; those belong to `wiki-verify`.
 
 ## Concepts
 Each distinct physics concept the paper INTRODUCES or centrally USES: name — one-line

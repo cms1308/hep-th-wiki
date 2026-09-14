@@ -12,8 +12,8 @@ If the question is really "how is X derived?" or asks for a worked derivation, u
 
 ## 1. Locate
 
-Read `Index.md`, identify candidate pages, read them, follow `[[links]]` (including
-`prerequisites:`) until the question is covered. Grep `wiki/` for keywords the Index misses.
+Read `Index.md`, identify candidate pages, read them, and follow relevant inline `[[links]]`
+until the question is covered. Grep `wiki/` for keywords the Index misses.
 
 ## 2. Deepen if needed
 

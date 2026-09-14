@@ -3,7 +3,6 @@ type: method
 title:
 aliases: []
 tags: []
-prerequisites: []
 created:
 updated:
 ---

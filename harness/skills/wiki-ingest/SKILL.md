@@ -27,8 +27,9 @@ Inventory substantive results and reusable calculation ingredients within the re
 scope before compressing them. Preserve important material without a fixed result/equation
 count, and follow {{SCHEMA}} → Paper explanations and technical completeness.
 Keep the inventory internal; do not emit a separate inventory/coverage table unless requested.
-For each main claim/equation retain the source file, page/section or heading, assumptions,
-source certainty, and convention conversion. Carry these locators into the written pages;
+For each main claim/equation retain the source file, page/section or heading, and source
+support/certainty. Keep assumptions and ranges in the body and convention translations in
+Conventions. Carry these locators into the written pages;
 paper-like pages use only the Evidence table for source annotations, short notes keep them
 inline. Do not repeat the same support in both places.
 
@@ -66,8 +67,8 @@ produce a truncated digest. Ingest hierarchically instead:
    "Wiki links" sections, or operation history; those belong on chapter pages or in `Log.md`.
 3. **Ingest per chapter**: each chapter is one paper-analyst unit (pass it the file/line range
    for that chapter only; run chapters in parallel when doing several). Textbook chapters
-   mostly feed **concept** and **method** pages — they are the wiki's 기초지식 layer, the
-   targets of other pages' `prerequisites:`.
+   mostly feed **concept** and **method** pages — they are the wiki's 기초지식 layer and
+   reusable inline-link targets.
 4. **Default to lazy**: on first ingest, build only the hub + TOC and deep-read nothing (or
    just the chapters the user asked about). Fill remaining chapters on demand — when
    the user authorizes a chapter suggested by `/wiki-ask`, or says "ingest chapter N" / "ingest the whole book".

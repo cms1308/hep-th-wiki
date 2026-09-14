@@ -1,6 +1,6 @@
 ---
 name: wiki-lint
-description: Health-check the hep-th wiki — contradictions, orphan pages, broken links, stale Index, missing prerequisites, poorly integrated papers. Use periodically or when the user asks for a wiki check.
+description: Health-check the hep-th wiki — contradictions, orphan pages, broken links, stale Index, and poorly integrated papers. Use periodically or when the user asks for a wiki check.
 ---
 
 # Lint the wiki
@@ -31,8 +31,7 @@ Do not start content verification automatically. Suggest `/wiki-verify` for stal
 6. **Contradictions / staleness** — spawn parallel Explore agents over `wiki/` clusters
    (by topic) to flag pages making conflicting claims, or `status: conjectured` results the
    wiki elsewhere treats as proven. Flag, don't silently fix.
-7. **Prerequisite gaps** — `prerequisites:` entries with no page and no red-link mention.
-8. **Convention hygiene** — pages mixing conventions without declaring them; equations
+7. **Convention hygiene** — pages mixing conventions without declaring them; equations
    translated from a source without a conversion dictionary on the paper page; two pages
    silently using clashing conventions inside one topic.
 

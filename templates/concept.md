@@ -3,7 +3,6 @@ type: concept
 title:
 aliases: []
 tags: []
-prerequisites: []
 created:
 updated:
 ---

@@ -27,7 +27,7 @@ Write the full derivation:
 - Preserve source file/section/equation locators, assumptions, and convention conversions
   for the premises and the final result; distinguish source claims from added deductions.
 - Standard LaTeX (`$...$`, `$$...$$`), self-contained — expand source macros.
-- Keep the level matched to the wiki's prerequisites structure: link
+- Keep the level matched to the wiki's existing background pages: link
   [[concepts]]/[[methods]] used instead of re-deriving them inline.
 
 ## 3. Verify

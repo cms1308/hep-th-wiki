@@ -3,7 +3,6 @@ type: derivation
 title:
 aliases: []
 tags: []
-prerequisites: []
 status: # verified | unverified
 source: # paper/source the derivation follows, if any
 created:

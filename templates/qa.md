@@ -3,7 +3,6 @@ type: qa
 title:
 aliases: []
 tags: []
-prerequisites: []
 status: resolved
 created:
 updated:

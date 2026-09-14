@@ -3,7 +3,6 @@ type: topic
 title:
 aliases: []
 tags: []
-prerequisites: []
 created:
 updated:
 ---
