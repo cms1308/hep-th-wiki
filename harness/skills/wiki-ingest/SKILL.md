@@ -37,6 +37,8 @@ inline. Do not repeat the same support in both places.
 
 Same as `/wiki-ingest-arxiv` steps 3–5 (verification is not part of ingest — run
 `/wiki-verify` separately if wanted):
+- Reconcile through `python3 scripts/wiki-search.py <slug-or-name>` plus targeted `rg -l`
+  searches; do not load the full `Index.md` into model context.
 - paper-like → `wiki/papers/<firstauthor><year>-<slug>.md`; notes/project results →
   `wiki/notes/<kebab-slug>.md`; then create/update touched topic/concept/method/result/
   question/person pages per the {{SCHEMA}} heuristic.

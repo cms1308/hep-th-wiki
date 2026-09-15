@@ -29,10 +29,18 @@ preference in AGENTS.md. Ask it to inventory substantive source content before w
 the structured extraction, including a Reading guide, reusable technical details and
 Evidence. Keep the inventory internal rather than requesting a separate table.
 Do not impose a result/equation count that drops important content.
+When the host supports context isolation, give the analyst only the source path, requested
+scope, and any user-specific emphasis; do not copy the parent conversation, `Index.md`, or
+previous ingest transcripts into its prompt. The analyst definition and AGENTS.md already
+carry the quality requirements.
 
 ## 3. Reconcile against the existing wiki
 
-Read `Index.md`. For each suggested entity decide:
+Do not load all of `Index.md` into model context. For each suggested entity, run
+`python3 scripts/wiki-search.py <slug-or-name>`, then read only the reported Index entries
+and candidate pages. Also use a targeted `rg -l` search for the entity's distinctive name
+and close synonyms when checking relations or possible tensions. If search returns an
+ambiguous candidate, inspect it rather than assuming it is distinct. For each entity decide:
 - page exists → **update** it (add this paper to "Where it appears" / "Key papers" /
   "Historical development", enrich sections if the paper adds substance);
 - doesn't exist but is a distinct linkable entity → **create** from `templates/<type>.md`;
@@ -65,11 +73,11 @@ instead of unifying.
   Frontmatter `inspire:`/`citations:` come from `refs.json`; always quote `arxiv:` as a YAML
   string, and set `arxiv_url:` to
   `https://arxiv.org/abs/<arxiv id>` (use the full id — do not let a trailing zero drop).
-- Citation graph: run `python3 scripts/citation-links.py <safe-id>` and fill the paper's
-  "Citation graph" section. **Both directions**: also append this paper to the "Cited by"
-  line of every wiki paper it cites, and check whether previously ingested papers cite this
-  one (older papers gain a "Cited by" entry when a classic they cite finally gets ingested
-  — the script reports this).
+- Citation graph: after the new paper page exists, run
+  `python3 scripts/citation-links.py --update <safe-id>`. It additively fills the target's
+  "Cites" / "Cited by" fields and the reciprocal fields of existing wiki papers. It never
+  removes hand-recorded edges or provenance notes. Inspect unresolved references in the
+  source `.bbl`/bibliography when INSPIRE lacks arXiv IDs, and add those edges manually.
 - Create/update the topic, concept, method, result, question, person pages decided in step 3.
   Every claim sourced from this paper links back as `[[<safe-id>|Author Year]]`.
 - Follow all conventions in `AGENTS.md` (frontmatter, naming, math).

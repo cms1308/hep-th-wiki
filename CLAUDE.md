@@ -49,7 +49,9 @@ sources/
 templates/           one template per page type — always start new pages from these
 scripts/arxiv-fetch.sh    download arXiv metadata + TeX source (calls inspire-fetch.sh)
 scripts/inspire-fetch.sh  INSPIRE-HEP recid, citation count, resolved references → refs.json
-scripts/citation-links.py cites / cited-by among ingested papers (from refs.json files)
+scripts/citation-links.py reports or additively updates cites / cited-by among ingested papers
+                         (from refs.json files; preserves manual edges)
+scripts/wiki-search.py    compact candidate lookup for reconciliation without loading Index.md
 .claude/skills/, .claude/agents/   Claude Code skills (the /wiki-* workflows) + the paper-analyst agent
 .agents/skills/, .codex/agents/    the same skills + agent for Codex — kept in sync (see "Agent front-ends")
 ```

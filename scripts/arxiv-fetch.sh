@@ -59,44 +59,53 @@ with open(f"{dest}/abstract.md", 'w', encoding='utf-8') as f:
 print(f"[arxiv-fetch] metadata: {meta['title']}")
 EOF
 
-# --- TeX source (e-print) ---
-TMP="$DEST/eprint.download"
-curl -sL "https://arxiv.org/e-print/$ID" -o "$TMP"
-KIND="$(file -b "$TMP")"
-echo "[arxiv-fetch] e-print type: $KIND"
+# TeX and INSPIRE are independent network requests; overlap them after metadata resolves.
+(
+  TMP="$DEST/eprint.download"
+  curl -sL "https://arxiv.org/e-print/$ID" -o "$TMP"
+  KIND="$(file -b "$TMP")"
+  echo "[arxiv-fetch] e-print type: $KIND"
 
-rm -rf "$DEST/tex"
-mkdir -p "$DEST/tex"
-case "$KIND" in
-  *gzip*)
-    if tar -tzf "$TMP" >/dev/null 2>&1; then
-      tar -xzf "$TMP" -C "$DEST/tex"
-    else
-      gunzip -c "$TMP" > "$DEST/tex/main.tex"
-    fi
-    rm "$TMP"
-    echo "[arxiv-fetch] TeX source extracted:"
-    find "$DEST/tex" -type f | sed "s#$DEST/##"
-    ;;
-  *tar*)
-    tar -xf "$TMP" -C "$DEST/tex"
-    rm "$TMP"
-    echo "[arxiv-fetch] TeX source extracted:"
-    find "$DEST/tex" -type f | sed "s#$DEST/##"
-    ;;
-  *PDF*)
-    rmdir "$DEST/tex"
-    mv "$TMP" "$DEST/paper.pdf"
-    echo "[arxiv-fetch] no TeX source; saved paper.pdf"
-    ;;
-  *)
-    # single uncompressed tex file
-    mv "$TMP" "$DEST/tex/main.tex"
-    echo "[arxiv-fetch] saved as tex/main.tex"
-    ;;
-esac
+  rm -rf "$DEST/tex"
+  mkdir -p "$DEST/tex"
+  case "$KIND" in
+    *gzip*)
+      if tar -tzf "$TMP" >/dev/null 2>&1; then
+        tar -xzf "$TMP" -C "$DEST/tex"
+      else
+        gunzip -c "$TMP" > "$DEST/tex/main.tex"
+      fi
+      rm "$TMP"
+      echo "[arxiv-fetch] TeX source extracted:"
+      find "$DEST/tex" -type f | sed "s#$DEST/##"
+      ;;
+    *tar*)
+      tar -xf "$TMP" -C "$DEST/tex"
+      rm "$TMP"
+      echo "[arxiv-fetch] TeX source extracted:"
+      find "$DEST/tex" -type f | sed "s#$DEST/##"
+      ;;
+    *PDF*)
+      rmdir "$DEST/tex"
+      mv "$TMP" "$DEST/paper.pdf"
+      echo "[arxiv-fetch] no TeX source; saved paper.pdf"
+      ;;
+    *)
+      # single uncompressed tex file
+      mv "$TMP" "$DEST/tex/main.tex"
+      echo "[arxiv-fetch] saved as tex/main.tex"
+      ;;
+  esac
+) &
+SOURCE_PID=$!
 
-# --- INSPIRE-HEP bibliographic data (non-fatal if unavailable) ---
-"$VAULT_DIR/scripts/inspire-fetch.sh" "$ID" || true
+# INSPIRE-HEP bibliographic data remain non-fatal if unavailable.
+"$VAULT_DIR/scripts/inspire-fetch.sh" "$ID" &
+INSPIRE_PID=$!
+
+wait "$SOURCE_PID"
+if ! wait "$INSPIRE_PID"; then
+  echo "[arxiv-fetch] WARNING: INSPIRE helper failed; continuing" >&2
+fi
 
 echo "$DEST"
