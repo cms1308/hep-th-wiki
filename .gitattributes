@@ -1,0 +1,2 @@
+# Obsidian Sync can deliver CRLF from some devices; keep markdown LF in history
+*.md text eol=lf
