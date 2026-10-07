@@ -2,6 +2,8 @@
 """Offline maintenance tests; temporary fixtures never touch wiki/ or sources/."""
 import importlib.util
 import json
+import subprocess
+import sys
 import tempfile
 import tomllib
 import unittest
@@ -22,6 +24,31 @@ wiki_search = load('wiki-search.py')
 
 
 class HarnessTests(unittest.TestCase):
+    def test_wikilink_table_rendering_checks(self):
+        script = Path(__file__).with_name('check-wikilinks.sh').read_text(encoding='utf-8')
+        body = script.split("<<'PY'\n", 1)[1].split('\nPY', 1)[0]
+        cases = {
+            'prose alias': ('[[target|alias]]\n', 0),
+            'escaped table alias': ('| ID | Source |\n|---|---|\n| [[#^r1\\|R1]] | text |\n', 0),
+            'raw table alias': ('| ID | Source |\n|---|---|\n| [[#^r1|R1]] | text |\n', 1),
+            'borderless table': ('ID | Source\n---|---\n[[#^r1|R1]] | text\n', 1),
+            'fenced example': ('```md\n| ID | Source |\n|---|---|\n| [[#^r1|R1]] | text |\n```\n', 0),
+            'even backslashes': ('| ID | Source |\n|---|---|\n| [[#^r1\\\\|R1]] | text |\n', 1),
+            'split link': ('[[foo\nbar]]\n', 1),
+            'math alias': ('[[foo|$x$]]\n', 1),
+            'evidence code pipe': ('## Evidence\n\n| ID | Source |\n|---|---|\n| E1 | `SU(1,1|2)` |\n', 1),
+            'escaped evidence code': ('## Evidence\n\n| ID | Source |\n|---|---|\n| E1 | `SU(1,1\\|2)` |\n', 0),
+            'evidence header width': ('## Evidence\n\n| ID | Source | Extra |\n|---|---|\n| E1 | text |\n', 1),
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            page = Path(tmp) / 'sample.md'
+            for name, (content, expected) in cases.items():
+                with self.subTest(name=name):
+                    page.write_text(content, encoding='utf-8')
+                    result = subprocess.run([sys.executable, '-', tmp], input=body,
+                                            text=True, capture_output=True)
+                    self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
+
     def test_generated_agent_preserves_tex_and_unicode(self):
         outputs = sync.render(sync.ROOT)
         agent = tomllib.loads(outputs['.codex/agents/paper-analyst.toml'])

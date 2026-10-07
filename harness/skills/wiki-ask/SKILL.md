@@ -15,6 +15,11 @@ If the question is really "how is X derived?" or asks for a worked derivation, u
 Read `Index.md`, identify candidate pages, read them, and follow relevant inline `[[links]]`
 until the question is covered. Grep `wiki/` for keywords the Index misses.
 
+If output is truncated or saved to a file, search to locate the relevant sections, then
+read those sections in bounded chunks, including assumptions, conventions, caveats, and
+the matching Evidence rows. Read these sections from the complete saved output when provided, or reread the
+original file by section/line range. Grep matches alone are not sufficient evidence.
+
 ## 2. Deepen if needed
 
 If the wiki's distillation is too shallow (equation-level detail, derivation steps), open the

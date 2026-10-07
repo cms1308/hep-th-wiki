@@ -83,6 +83,7 @@ One-sentence plain summary.
 
 <!-- One row per main result (R1...) and equation (E1..., including Technical details),
      linking its body block; map other sourced passages by section/claim name.
+     Escape each link's alias separator as \| inside the table to avoid extra columns.
      Use exact source file + section/equation label; PDF: page + section. Do not guess.
      State support/certainty compactly. Assumptions/ranges stay in the body and convention
      translations stay in Conventions.
@@ -90,7 +91,7 @@ One-sentence plain summary.
 
 | ID | Source locator | Support / certainty |
 |---|---|---|
-| [[#^r1|R1]] | | |
+| [[#^r1\|R1]] | | |
 
 ## Open questions raised
 

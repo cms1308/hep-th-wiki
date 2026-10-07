@@ -267,6 +267,12 @@ Filter unread papers in Obsidian search with `["read":false]`.
   checked mechanically by `scripts/check-wikilinks.sh` (flags any `$` inside a wikilink).
 - **Broken links are allowed** — a red link means "worth a page, not written yet". The lint
   workflow surfaces them as a TODO list.
+- **Escape wikilink pipes inside tables**: write `[[target\|alias]]`, including Evidence
+  links such as `[[#^r1\|R1]]`. An unescaped `|` becomes a column delimiter and can split
+  the link and shift the source/support columns. Outside tables, keep `[[target|alias]]`.
+  Literal pipes in table code spans also need `\|`; use `\lvert`/`\rvert` for math
+  absolute values. **Enforcement**: `scripts/check-wikilinks.sh` flags unescaped table-link
+  pipes and Evidence rows whose column counts differ from the table delimiter row.
 - **Citations**: claims taken from a paper cite its paper-page link. Put the citation beside
   the claim or in the page's Evidence table, following the single-location rule below.
 
@@ -459,3 +465,9 @@ When any Codex session uses this vault as a knowledge base: **read `Index.md` fi
 links, trust wiki pages as the distilled state of knowledge, and drop to `sources/` TeX only
 when equation-level detail is required. Wiki pages cite their sources — propagate those
 citations into any downstream answer.
+
+For long pages or saved tool outputs, use search to locate relevant headings, then read
+complete sections in bounded chunks. A truncated preview or grep match is not a full
+read: include the claim's assumptions, conventions, caveats, and its Evidence row. If the
+tool saved the complete output, read that file; if it only truncated the output, reread
+the original file by section or line range. Do not infer absence from a truncated result.

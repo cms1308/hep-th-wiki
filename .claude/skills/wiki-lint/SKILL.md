@@ -18,9 +18,12 @@ Do not start content verification automatically. Suggest `/wiki-verify` for stal
    still match page content.
 2. **Broken links** — collect all `[[targets]]` with no file. These are features (planned
    pages), but rank them by inbound-link count as a "write next" list.
-2b. **Split wikilinks** — run `scripts/check-wikilinks.sh`: any `[[...]]` broken across a
+2b. **Malformed wikilinks** — run `scripts/check-wikilinks.sh`: any `[[...]]` broken across a
    newline renders as plain text in Obsidian. Auto-fix by joining each onto one line (this is
    a mechanical fix, not a content decision).
+   In tables, escape alias pipes as `[[target\|alias]]` (Evidence: `[[#^r1\|R1]]`);
+   an unescaped pipe splits cells. Repair any already-shifted columns without changing
+   source locators or support text.
 3. **Orphans** — wiki pages with zero inbound links from other wiki pages.
 4. **Frontmatter** — run `scripts/check-frontmatter.sh` first: a page whose YAML fails to
    parse shows in Obsidian as "invalid properties" and silently loses its aliases/tags
