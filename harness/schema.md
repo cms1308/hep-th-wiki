@@ -70,7 +70,7 @@ Every wiki page answers a different question:
 | **question** | "what is unknown and why does it matter?" (research open problem, raised by an ingested paper) | Statement · Why it matters · Main attempts · Current status |
 | **qa** | "what did *I* ask and understand?" (a confusion the user resolved via `/wiki-ask`) | Question · Answer · Key points · See also |
 | **person** | "who is this, what did they do?" | Contributions · Key papers · Context |
-| **paper** | "what does this paper say, and how can I understand and use it?" | TL;DR · Motivation · Historical context · Reading guide · Main results · Methods · Conventions · Key equations · Technical details (when needed) · Evidence · Open questions raised · Wiki links |
+| **paper** | "what does this paper say, and how can I understand and use it?" | TL;DR · Motivation and context · Reading guide · Main results · Conventions · Evidence · Open questions raised · Wiki links; Methods / Key equations / Technical details when useful |
 | **lecture** | "teach me this subject, chapter by chapter" (prose lecture note merged from all ingested textbooks; see below) | Narrative prose under concise subject headings · Conventions; chapter tracking in frontmatter and book hub |
 | **note** | "what did *I* find/learn?" | free-form, but must link into the wiki |
 
@@ -81,7 +81,9 @@ needed and linked inline. It is not duplicated as frontmatter metadata.
 ### Paper TL;DR block
 
 The `## TL;DR` of a paper page is a structured block, not a single compressed sentence — it
-is the accessible on-ramp for a reader unfamiliar with the subfield:
+is the accessible on-ramp for a reader unfamiliar with the subfield. The following bullet
+counts are guidelines, not quotas; use fewer for a narrow paper, and omit Takeaway when it
+would only repeat Results:
 
 ```
 One-sentence plain summary of what the paper does.
@@ -105,10 +107,10 @@ Writing rules (these matter more than the structure):
 - One idea per bullet, complete sentences.
 - Formulas, numbered claims, and precision live in the body sections (Main results, Key
   equations) — the TL;DR states the same content at lower resolution. The overlap with
-  Motivation/Main results is intended (abstract vs. body).
+  Motivation and context/Main results is intended (abstract vs. body).
 
-Relatedly, each **Methods** entry notes which main result it feeds, ending with
-"→ used in result 3" (omit only when the method is genuinely global to the paper).
+When a separate **Methods** section is useful, each entry notes which main result it feeds,
+ending with "→ used in result 3" (omit only when the method is genuinely global to the paper).
 
 ### Paper explanations and technical completeness
 
@@ -116,28 +118,41 @@ Ingest has two roles: extract the source's substantive content, then explain and
 The same model can perform both; a second provider is not required. In Codex, prefer
 GPT6 (`gpt-6-astra`) for the paper analyst when available, unless the user chooses otherwise.
 
+- **Require information, not redundant headings.** The template is a default layout, not
+  a demand to fill every section. Motivation and context briefly combines the problem,
+  why it matters, and the directly relevant prior work. Add a separate Historical context
+  section only when an extended history materially helps explain the contribution, without
+  repeating that introduction. Keep Methods only for shared or reusable techniques whose
+  explanation would otherwise be scattered; omit it when the Reading guide and results
+  already explain their application. Omit empty Key equations and Technical details sections.
+  Flexible layout must not remove assumptions, conventions, source support, or reusable calculations.
 - **Extract before compressing.** Inventory independent main results and the ingredients
   needed to understand or reuse them: definitions, normalization maps, initial data,
   recurrences, relevant special cases, and validity limits, including useful appendix material.
   Do not cap the number of results or equations. Select for significance and reuse;
   transcribing every intermediate algebraic step is unnecessary.
-- **Teach the argument.** A paper's Reading guide is a short, non-duplicative route through
-  the paper: normally 3–6 connected paragraphs explaining only the minimal sourced background
-  and the path from problem to method to outcome. It introduces no new result or equation that
-  belongs in Main results or Key equations, and does not repeat Motivation, Historical context,
-  or Methods item by item. Explain unfamiliar terms at first use; a link alone is not an
-  explanation. Main results give the intuition before the precise claim and its assumptions.
-  Mark source gaps instead of inventing background.
-- **Keep calculations findable.** Retain equations needed to follow the argument beside it.
-  Longer computational ingredients go in Key equations, an optional Technical details
-  section, or linked canonical method/result/derivation pages. State what each computes,
-  its inputs, notation, and regime. Preserve exact statements and locators through editing;
-  respect paper-only requests by keeping the needed details on that page.
+- **Teach the argument.** A paper's Reading guide explains the minimal sourced background
+  and why each conceptual step leads to the next, from problem to method to outcome. Its
+  length follows the argument's difficulty, with no paragraph quota. It is not another
+  abstract, history, method list, or result inventory. Introduce no new result or equation
+  that belongs in the technical body. Explain unfamiliar terms at first use; a link alone
+  is not an explanation. Main results give the intuition before the precise claim and its
+  assumptions. Mark source gaps instead of inventing background.
+- **Keep calculations findable without duplicating them.** Put a result's defining equation
+  beside its statement, with inputs, notation, and regime. Key equations holds additional
+  formulas needed to understand or reuse the results; refer back to a result rather than
+  copying its equation there. Longer computational ingredients go in optional Technical
+  details or linked canonical method/result/derivation pages. Keep enough explanation to
+  read each result without a chain of link lookups. Preserve exact statements and locators
+  through editing; respect paper-only requests by keeping the needed details on that page.
 - **Make incidental source problems concrete.** Ingest records local inconsistencies that
   become apparent during extraction—for example conflicting definitions, dimensional or
   grading mismatches, or a simple substitution into a displayed formula. Show the concrete
-  conflict and put its source locator in Evidence. Label it as an incidental extraction
-  finding, not an exhaustive review. Systematic counterexample searches, global correctness
+  conflict beside the affected claim/equation, or put the detail in Technical details with
+  a short warning and link beside the affected claim. Keep Conventions focused on definitions,
+  normalizations, and conversion dictionaries rather than an accumulated issue list. Put
+  the source locator in Evidence. Label it as an incidental extraction finding, not an
+  exhaustive review. Systematic counterexample searches, global correctness
   judgments, and attempts to refute the paper belong to `wiki-verify`. Do not silently repair
   a source problem or preserve an unresolved expression as a usable identity.
 - **Check for omissions internally.** Before finishing, compare the draft and linked
@@ -347,9 +362,11 @@ table, never both for the same support.** Paper digests default to Evidence only
 results/equations carry R/E IDs and Obsidian block IDs (`^r1`, `^e1`, ...), without repeated
 source annotations after paragraphs or formulas. Place the matching block ID after the
 complete numbered result or equation item and link the Evidence ID back to that block; do not
-add an outline heading merely to make an anchor. Map other sourced passages by section/claim
-name in the same table. Other
-page types default to citations and locators beside claims, without an additional Evidence
+add an outline heading merely to make an anchor. A defining formula within an R item is
+covered by that result's Evidence row; reserve E IDs for separately presented equations,
+without duplicating the formula or its support just to assign both IDs. Map other sourced
+passages by section/claim name in the same table. Other page types default to citations and
+locators beside claims, without an additional Evidence
 table. Keep conditions and material caveats readable in the body. This is extraction
 provenance, not an independent verification.
 Do not fabricate locators; mark missing support explicitly and leave unsupported knowledge

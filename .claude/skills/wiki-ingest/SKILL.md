@@ -18,11 +18,14 @@ Input: a file path, URL, or pasted content.
 
 ## 2. Read and extract
 
-Read the source (PDF via the Read tool page by page). For paper-like sources, extract the same
-structure paper-analyst produces (TL;DR / motivation / results / methods / key equations /
-reading guide / technical details / concepts / people / open questions / evidence);
-for long sources spawn a general-purpose agent to do the
-reading. For short notes/web clips, a lighter extraction is fine — don't pad.
+Read the source (PDF via the Read tool page by page). For paper-like sources, follow the
+paper-analyst's flexible layout: TL;DR, motivation and context, Reading guide, results,
+conventions, evidence, concepts, people, and open questions; use separate Methods,
+Key equations, and Technical details sections only when they add distinct information.
+Keep defining formulas with their results and additional calculation ingredients in the
+appropriate technical sections, without repeating formulas to fill headings.
+For long sources spawn a general-purpose agent to do the reading.
+For short notes/web clips, a lighter extraction is fine — don't pad.
 Inventory substantive results and reusable calculation ingredients within the requested
 scope before compressing them. Preserve important material without a fixed result/equation
 count, and follow CLAUDE.md → Paper explanations and technical completeness.

@@ -62,6 +62,9 @@ instead of unifying.
   completeness: teach the argument in readable prose, retain precise statements and
   calculation ingredients in the appropriate sections or linked canonical pages. Keep
   required details on the paper page when the user requests paper-only scope.
+  Use the template's flexible layout: combine motivation with directly relevant context,
+  keep Methods only when it adds a distinct explanation, and omit empty optional sections.
+  A result's defining formula stays with that result; Key equations holds additional formulas.
   Fill the "Wiki links" section with every touched page.
   Preserve the analyst's compact `Evidence` table for every main result and key equation,
   including source locators and support/certainty. Keep assumptions and ranges in the body,
