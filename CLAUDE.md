@@ -141,10 +141,18 @@ GPT6 (`gpt-6-astra`) for the paper analyst when available, unless the user choos
 - **Keep calculations findable without duplicating them.** Put a result's defining equation
   beside its statement, with inputs, notation, and regime. Key equations holds additional
   formulas needed to understand or reuse the results; refer back to a result rather than
-  copying its equation there. Longer computational ingredients go in optional Technical
-  details or linked canonical method/result/derivation pages. Keep enough explanation to
-  read each result without a chain of link lookups. Preserve exact statements and locators
-  through editing; respect paper-only requests by keeping the needed details on that page.
+  copying its equation there. By default, place long calculations, coefficient expansions,
+  recurrences, and extensive technical tables on linked canonical method/result/derivation
+  pages during ingest, rather than accumulating them on the paper page. Reuse existing
+  pages when appropriate; create a page only for a distinct linkable subject. The paper
+  keeps the argument, all independent main results, their defining formulas and conditions,
+  essential conventions, and direct links to the relevant calculation sections or blocks.
+  Keep enough explanation to read each result without a chain of link lookups. Moved
+  material retains its full reusable content, local inputs and conventions, exact source
+  locators, support qualifications, and unresolved source caveats. Short supporting details
+  may stay in Technical details. This is a placement rule, not a word limit: never discard
+  content to shorten a digest, and respect paper-only requests by keeping the needed details
+  on that page.
 - **Make incidental source problems concrete.** Ingest records local inconsistencies that
   become apparent during extraction—for example conflicting definitions, dimensional or
   grading mismatches, or a simple substitution into a displayed formula. Show the concrete

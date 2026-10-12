@@ -18,7 +18,14 @@ updated:
 <!-- Source annotations belong only in Evidence; do not repeat them after body paragraphs
      or formulas. Match body R/E IDs or section/claim names to the table.
      This is a default layout: omit optional sections that add no distinct information,
-     while preserving all needed assumptions, conventions, support, and calculations. -->
+     while preserving all needed assumptions, conventions, support, and calculations.
+     Keep all independent main results, defining formulas, conditions, and essential
+     conventions here. By default, put long calculations, expansions, recurrences, and
+     extensive technical tables on canonical method/result/derivation pages, with direct
+     section/block links from the relevant passages here. Preserve local definitions,
+     conventions, exact source locators, support qualifications, and caveats there.
+     Do not impose a word limit or copy the entire analyst extraction into this page.
+     Honor an explicit paper-only request by retaining the needed details here. -->
 
 ## TL;DR
 
@@ -85,8 +92,10 @@ One-sentence plain summary.
 
 ## Technical details
 
-<!-- Optional: omit if Main results, Key equations, or linked canonical pages hold all needed
-     details. Preserve useful recurrences, initial data, normalization maps, and special cases.
+<!-- Optional: short supporting details only by default; put long reusable calculations on
+     linked canonical pages. Omit if Main results, Key equations, or linked canonical pages
+     hold all needed details. Preserve useful recurrences, initial data, normalization maps,
+     and special cases wherever they are filed.
      Continue equation IDs E1, E2, ... for Evidence; avoid duplicating equations.
      For a material source inconsistency, state the precise conflict, with locators in Evidence; keep
      a short warning and link beside the affected claim/equation if the detail is here.

@@ -30,6 +30,9 @@ self-contained.
 
 Use the sections below as a default layout, preserving required information without padding
 headings. Methods, Key equations, and Technical details are optional under the criteria below.
+This extraction supplies both the paper digest and linked canonical calculation pages.
+Keep all reusable technical content here; the integrating agent will place long calculations
+on those pages instead of copying the entire extraction into the final paper digest.
 Keep source citations/locators only in Evidence, not after body paragraphs or formulas.
 Body items use R/E IDs or section/claim names to match the table.
 

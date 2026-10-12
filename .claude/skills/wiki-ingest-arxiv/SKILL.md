@@ -46,6 +46,12 @@ ambiguous candidate, inspect it rather than assuming it is distinct. For each en
 - doesn't exist but is a distinct linkable entity → **create** from `templates/<type>.md`;
 - marginal → just link it in prose (broken link = "write later").
 
+Plan destinations for the extraction's long calculations, coefficient expansions, recurrences,
+and extensive technical tables at this stage. Default to canonical method/result/derivation
+pages, reusing existing subjects before creating new ones. A calculation retained from the
+extraction needs a written destination, not just a red link. Preserve other papers' content
+and distinguish incompatible conventions when extending a shared page.
+
 Check for contradictions with existing pages; if found, state both claims with citations on
 the affected page under a `> [!warning] Tension` callout.
 
@@ -59,15 +65,23 @@ instead of unifying.
 
 - `wiki/papers/<safe-id>.md` from `templates/paper.md` — the full digest, LaTeX math in
   `$...$`, custom macros expanded. Follow CLAUDE.md → Paper explanations and technical
-  completeness: teach the argument in readable prose, retain precise statements and
-  calculation ingredients in the appropriate sections or linked canonical pages. Keep
-  required details on the paper page when the user requests paper-only scope.
+  completeness: teach the argument in readable prose and keep all independent main results,
+  their defining formulas and conditions, and essential conventions on the paper. Write long
+  calculations to the canonical destinations chosen in step 3, with direct section/block
+  links from the relevant paper passages. Preserve full reusable calculation content, local
+  definitions and conventions, exact source locators, support qualifications, and unresolved
+  caveats at each destination. Short supporting details may remain on the paper. Do not copy
+  the analyst's complete technical extraction wholesale into the final digest or impose a
+  word limit that drops content. Keep required details on the paper page when the user
+  requests paper-only scope.
   Use the template's flexible layout: combine motivation with directly relevant context,
   keep Methods only when it adds a distinct explanation, and omit empty optional sections.
   A result's defining formula stays with that result; Key equations holds additional formulas.
   Fill the "Wiki links" section with every touched page.
-  Preserve the analyst's compact `Evidence` table for every main result and key equation,
-  including source locators and support/certainty. Keep assumptions and ranges in the body,
+  Preserve the analyst's source locators and support/certainty for every main result and
+  key equation. The paper's compact `Evidence` table maps the claims retained on that page;
+  moved calculations carry their provenance at their canonical destinations under the
+  citation rules for those page types. Keep assumptions and ranges in the body,
   and convention translations in Conventions. Preserve the `^rN`/`^eN` Obsidian block IDs
   and reconcile IDs if results are reordered. Put source citations/locators only in Evidence, not also after body
   paragraphs or formulas; map other sourced passages by section/claim name. For claims
@@ -87,7 +101,10 @@ instead of unifying.
 
 Before bookkeeping, check the written pages and linked calculations against the extraction
 for important omissions. Restore missing content and retain equations, assumptions, source
-citations, and material caveats. Do not add a separate Coverage table unless requested.
+citations, and material caveats. Check that moved calculations have working direct links,
+enough local definitions to be reused, and preserved source support; the paper must still
+explain each main result without requiring a chain of lookups. Do not add a separate Coverage
+table unless requested.
 This is an internal completeness check, not independent physics verification;
 do not run a refute agent or create a verification record as part of ingest.
 
